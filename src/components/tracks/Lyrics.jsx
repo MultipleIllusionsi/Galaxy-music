@@ -3,6 +3,7 @@ import axios from "axios";
 import { Link } from "react-router-dom";
 import Spinner from "../layout/Spinner";
 import Moment from "react-moment";
+//СТРАНИЦА ПРИ НАЖАТИИ > VIEW LYRICS
 
 class Lyrics extends Component {
   state = {
@@ -33,7 +34,7 @@ class Lyrics extends Component {
 
   render() {
     const { track, lyrics } = this.state;
-    console.log(track);
+    // console.log(track);
 
     if (
       track === undefined ||
@@ -45,9 +46,12 @@ class Lyrics extends Component {
     } else {
       return (
         <Fragment>
-          <Link to="/" className="btn btn-dark btn-sm mb-4">
+          <button
+            onClick={this.props.history.goBack}
+            className="btn btn-dark btn-sm my-4"
+          >
             Go Back
-          </Link>
+          </button>
           <div className="card">
             <h5 className="card-header">
               {track.track_name} by
@@ -59,7 +63,11 @@ class Lyrics extends Component {
           </div>
           <ul className="list-group mt-3">
             <li className="list-group-item">
-              <strong>Album ID: </strong> {track.album_id}
+              <strong>Track Rating: </strong>
+              {track.track_rating}
+            </li>
+            <li className="list-group-item">
+              <strong>Album Name: </strong> {track.album_name}
             </li>
             <li className="list-group-item">
               <strong>Song Genre: </strong>
@@ -67,10 +75,6 @@ class Lyrics extends Component {
                 ? "Unknown"
                 : track.primary_genres.music_genre_list[0].music_genre
                     .music_genre_name}
-            </li>
-            <li className="list-group-item">
-              <strong>Explicit Words: </strong>
-              {track.explicit === 0 ? "No" : "Yes"}
             </li>
             <li className="list-group-item">
               <strong>Release Date: </strong>

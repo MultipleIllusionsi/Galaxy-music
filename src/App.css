@@ -1,0 +1,39 @@
+/* body {
+  background-color: #6c757d;
+} */
+
+.App {
+  min-width: 500px;
+}
+
+.line {
+  box-shadow: 0px 0px 50px 25px lightslategray;
+}
+
+.container {
+  max-width: 1500px;
+}
+
+.container .min {
+  max-width: 700px;
+}
+
+.navbar-brand {
+  color: lightcyan;
+}
+
+.navbar-nav {
+  flex-direction: row;
+}
+
+.navbar-dark .navbar-nav .nav-link {
+  color: white;
+}
+
+a:focus {
+  border-bottom: 1px wheat solid;
+}
+
+.display-5 {
+  font-size: 2em;
+}
