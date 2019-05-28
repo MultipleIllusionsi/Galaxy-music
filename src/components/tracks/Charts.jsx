@@ -1,10 +1,12 @@
 import React, { Component } from "react";
 import axios from "axios";
 import Spinner from "../layout/Spinner";
+import { Link } from "react-router-dom";
 
 class Charts extends Component {
   state = {
-    trackTitle: "",
+    sectionTitle: "",
+    activeData: [],
     // top_tracks: [],
     // hot_tracks: [],
     // top_artists: [],
@@ -13,44 +15,77 @@ class Charts extends Component {
 
   topTrack = e => {
     e.preventDefault();
-    axios
-      .get(
-        `https://cors-anywhere.herokuapp.com/https://api.musixmatch.com/ws/1.1/chart.tracks.get?chart_name=top&page=1&page_size=10&country=us&f_has_lyrics=1&apikey=${
-          process.env.REACT_APP_MM_KEY
-        }`
-      )
-      .then(res => {
-        this.setState({ top_tracks: res.data.message.body.track_list });
-      })
-      .catch(err => console.log(err));
+    if (!this.state.top_tracks) {
+      axios
+        .get(
+          `https://cors-anywhere.herokuapp.com/https://api.musixmatch.com/ws/1.1/chart.tracks.get?chart_name=top&page=1&page_size=10&country=us&f_has_lyrics=1&apikey=${
+            process.env.REACT_APP_MM_KEY
+          }`
+        )
+        .then(res => {
+          this.setState({
+            top_tracks: res.data.message.body.track_list,
+            activeData: res.data.message.body.track_list,
+            sectionTitle: "TOP TRACKS"
+          });
+        })
+        .catch(err => console.log(err));
+    } else {
+      this.setState({
+        activeData: this.state.top_tracks,
+        sectionTitle: "TOP TRACKS"
+      });
+    }
   };
 
   hotTrack = e => {
     e.preventDefault();
-    axios
-      .get(
-        `https://cors-anywhere.herokuapp.com/https://api.musixmatch.com/ws/1.1/chart.tracks.get?chart_name=hot&page=1&page_size=10&country=us&f_has_lyrics=1&apikey=${
-          process.env.REACT_APP_MM_KEY
-        }`
-      )
-      .then(res => {
-        this.setState({ hot_tracks: res.data.message.body.track_list });
-      })
-      .catch(err => console.log(err));
+    if (!this.state.hot_tracks) {
+      axios
+        .get(
+          `https://cors-anywhere.herokuapp.com/https://api.musixmatch.com/ws/1.1/chart.tracks.get?chart_name=hot&page=1&page_size=10&country=us&f_has_lyrics=1&apikey=${
+            process.env.REACT_APP_MM_KEY
+          }`
+        )
+        .then(res => {
+          this.setState({
+            hot_tracks: res.data.message.body.track_list,
+            activeData: res.data.message.body.track_list,
+            sectionTitle: "HOT TRACKS"
+          });
+        })
+        .catch(err => console.log(err));
+    } else {
+      this.setState({
+        activeData: this.state.hot_tracks,
+        sectionTitle: "HOT TRACKS"
+      });
+    }
   };
 
   topArtists = e => {
     e.preventDefault();
-    axios
-      .get(
-        `https://cors-anywhere.herokuapp.com/https://api.musixmatch.com/ws/1.1/chart.artists.get?page=1&page_size=10&country=us&apikey=${
-          process.env.REACT_APP_MM_KEY
-        }`
-      )
-      .then(res => {
-        this.setState({ top_artists: res.data.message.body.artist_list });
-      })
-      .catch(err => console.log(err));
+    if (!this.state.top_artists) {
+      axios
+        .get(
+          `https://cors-anywhere.herokuapp.com/https://api.musixmatch.com/ws/1.1/chart.artists.get?page=1&page_size=10&country=us&apikey=${
+            process.env.REACT_APP_MM_KEY
+          }`
+        )
+        .then(res => {
+          this.setState({
+            top_artists: res.data.message.body.artist_list,
+            activeData: res.data.message.body.artist_list,
+            sectionTitle: "TOP ARTISTS"
+          });
+        })
+        .catch(err => console.log(err));
+    } else {
+      this.setState({
+        activeData: this.state.top_artists,
+        sectionTitle: "TOP ARTISTS"
+      });
+    }
   };
 
   render() {
@@ -64,8 +99,8 @@ class Charts extends Component {
               alt="..."
             />
             <div className="card-body text-center">
-              <h5 className="card-title">TOP TRACKS</h5>
-              <p className="card-text">TOP TRACKS</p>
+              <h1 className="card-title mt-4">TOP TRACKS</h1>
+              <p className="card-text">Песни, находящиеся в топ чарте</p>
               <button
                 onClick={this.topTrack}
                 className="btn btn-outline-primary "
@@ -75,10 +110,12 @@ class Charts extends Component {
             </div>
           </div>
 
-          <div className="card border-0 mt-4">
+          <div className="card border-0 ">
             <div className="card-body text-center">
-              <h5 className="card-title">HOT TRACKS</h5>
-              <p className="card-text">HOT TRACKS</p>
+              <h1 className="card-title">HOT TRACKS</h1>
+              <p className="card-text">
+                Самые популярные песни за последние 2 часа
+              </p>
               <button
                 onClick={this.hotTrack}
                 className="btn btn-outline-primary"
@@ -100,8 +137,8 @@ class Charts extends Component {
               alt="..."
             />
             <div className="card-body text-center">
-              <h5 className="card-title">TOP ARTISTS</h5>
-              <p className="card-text">TOP ARTISTS</p>
+              <h1 className="card-title mt-4">TOP ARTISTS</h1>
+              <p className="card-text">Самые прослушиваемые исполнители</p>
               <button
                 onClick={this.topArtists}
                 className="btn btn-outline-primary"
@@ -112,32 +149,25 @@ class Charts extends Component {
           </div>
         </div>
         {""}
-        <div className="line" />
         {""}
         <div className="container min">
-          {this.state.top_tracks && (
-            <ul className="list-group list-group-flush mt-5">
-              <div className="display-3">TOP TRACKS</div>
-              {this.state.top_tracks.map(elem => (
-                <li className="list-group-item">{elem.track.track_name}</li>
-              ))}
-            </ul>
-          )}
+          {this.state.activeData.length > 0 && (
+            <ul className="list-group list-group-flush pt-5">
+              <div className="display-3 text-center">
+                {this.state.sectionTitle}
+              </div>
+              {this.state.activeData.map(elem => (
+                <li className="list-group-item d-flex justify-content-between align-items-center">
+                  {elem.track
+                    ? `${elem.track.artist_name} - ${elem.track.track_name}`
+                    : elem.artist.artist_name}
 
-          {this.state.hot_tracks && (
-            <ul className="list-group list-group-flush mt-5">
-              <div className="display-3 ">HOT TRACKS</div>
-              {this.state.hot_tracks.map(elem => (
-                <li className="list-group-item">{elem.track.track_name}</li>
-              ))}
-            </ul>
-          )}
-
-          {this.state.top_artists && (
-            <ul className="list-group list-group-flush mt-5 ">
-              <div className="display-3 ">TOP ARTIST</div>
-              {this.state.top_artists.map(elem => (
-                <li className="list-group-item">{elem.artist.artist_name}</li>
+                  <span class="badge badge-primary badge-pill">
+                    {elem.track
+                      ? elem.track.track_rating
+                      : elem.artist.artist_rating}
+                  </span>
+                </li>
               ))}
             </ul>
           )}

@@ -67,9 +67,10 @@ class Search extends Component {
           <div>
             <h3 className="text-center mb-4 ">Search Songs</h3>
             <div className="row">
-              {this.state.result.map(item => (
-                <Track key={item.track.track_id} track={item.track} />
-              ))}
+              {this.state.result.map(item => {
+                console.log(item);
+                return <Track key={item.track.track_id} track={item.track} />;
+              })}
             </div>
           </div>
         )}

@@ -1,13 +1,14 @@
-/* body {
-  background-color: #6c757d;
-} */
+body {
+  font-family: "Montserrat", sans-serif;
+  /* font-family: "Volkhov", serif; */
+}
 
 .App {
   min-width: 500px;
 }
 
 .line {
-  box-shadow: 0px 0px 50px 25px lightslategray;
+  box-shadow: 0px 0px 50px 30px lightslategray;
 }
 
 .container {
@@ -16,6 +17,8 @@
 
 .container .min {
   max-width: 700px;
+  /* background-color: lightgray; */
+  box-shadow: 0px 0px 50px 30px lightslategray;
 }
 
 .navbar-brand {

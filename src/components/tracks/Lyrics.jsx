@@ -36,12 +36,7 @@ class Lyrics extends Component {
     const { track, lyrics } = this.state;
     // console.log(track);
 
-    if (
-      track === undefined ||
-      lyrics === undefined ||
-      Object.keys(track).length === 0 ||
-      Object.keys(lyrics).length === 0
-    ) {
+    if (track === undefined || Object.keys(track).length === 0) {
       return <Spinner />;
     } else {
       return (
@@ -58,7 +53,11 @@ class Lyrics extends Component {
               <span className="text-secondary"> {track.artist_name}</span>
             </h5>
             <div className="card-body">
-              <p className="card-text">{lyrics.lyrics_body}</p>
+              <p className="card-text">
+                {lyrics
+                  ? lyrics.lyrics_body
+                  : "Sorry, there is no lyrics in this song"}
+              </p>
             </div>
           </div>
           <ul className="list-group mt-3">
@@ -75,6 +74,10 @@ class Lyrics extends Component {
                 ? "Unknown"
                 : track.primary_genres.music_genre_list[0].music_genre
                     .music_genre_name}
+            </li>
+            <li className="list-group-item">
+              <strong>Favorited: </strong>
+              {track.num_favourite}
             </li>
             <li className="list-group-item">
               <strong>Release Date: </strong>
