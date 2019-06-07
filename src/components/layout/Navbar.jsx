@@ -1,6 +1,7 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React from "react";
 import "./Navbar.css";
+import { NavLink } from "react-router-dom";
 
 const Navbar = () => {
   return (
@@ -10,18 +11,27 @@ const Navbar = () => {
       </div>
 
       <div role="navigation" className="navbar-nav h4 p-0 col-12 col-md-6">
-        <a
+        <NavLink
           className="nav-item nav-link col-4 col-md-3 offset-md-3"
-          href="/charts"
+          to="/charts"
+          activeClassName="active"
         >
           Top Charts
-        </a>
-        <a className="nav-item nav-link col-4 col-md-3" href="/genre">
+        </NavLink>
+        <NavLink
+          className="nav-item nav-link col-4 col-md-3"
+          to="/genre"
+          activeClassName="active"
+        >
           Genres
-        </a>
-        <a className="nav-item nav-link col-4 col-md-3" href="/">
+        </NavLink>
+        <NavLink
+          className="nav-item nav-link col-4 col-md-3"
+          to="/"
+          activeClassName="active"
+        >
           Search
-        </a>
+        </NavLink>
       </div>
     </nav>
   );

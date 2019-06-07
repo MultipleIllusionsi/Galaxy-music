@@ -3,14 +3,21 @@ import axios from "axios";
 import { Link } from "react-router-dom";
 import Spinner from "../layout/Spinner";
 import Moment from "react-moment";
+import Album from "./Album";
+
+import "./Lyrics.css";
 //СТРАНИЦА ПРИ НАЖАТИИ > VIEW LYRICS
 
 class Lyrics extends Component {
   state = {
     track: {},
-    lyrics: {}
+    lyrics: {},
+    moreActive: false
   };
 
+  handleAlbum = () => {
+    this.setState({ moreActive: true });
+  };
   componentDidMount() {
     axios
       .get(
@@ -66,7 +73,16 @@ class Lyrics extends Component {
               {track.track_rating}
             </li>
             <li className="list-group-item">
-              <strong>Album Name: </strong> {track.album_name}
+              <strong>Album Name:</strong>
+              {track.album_name}
+              {this.state.moreActive && <Album id={track.album_id} />}
+              <button
+                // to={`/lyrics/album/${track.album_id}`}
+                onClick={this.handleAlbum}
+                className="Album-more btn btn-outline-primary btn-sm"
+              >
+                more...
+              </button>
             </li>
             <li className="list-group-item">
               <strong>Song Genre: </strong>

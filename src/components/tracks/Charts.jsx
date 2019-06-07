@@ -99,7 +99,7 @@ class Charts extends Component {
               alt="..."
             />
             <div className="card-body text-center">
-              <h1 className="card-title mt-4">TOP TRACKS</h1>
+              <h1 className="card-title display-5 mt-4">TOP TRACKS</h1>
               <p className="card-text">Песни, находящиеся в топ чарте</p>
               <button
                 onClick={this.topTrack}
@@ -110,9 +110,14 @@ class Charts extends Component {
             </div>
           </div>
 
-          <div className="card border-0 ">
+          <div className="card border-0">
+            <img
+              src="https://hdwallsource.com/img/2017/12/travis-scott-desktop-wallpaper-62068-63984-hd-wallpapers.jpg"
+              className="card-img-top"
+              alt="..."
+            />
             <div className="card-body text-center">
-              <h1 className="card-title">HOT TRACKS</h1>
+              <h1 className="card-title display-5">HOT TRACKS</h1>
               <p className="card-text">
                 Самые популярные песни за последние 2 часа
               </p>
@@ -123,11 +128,6 @@ class Charts extends Component {
                 Check
               </button>
             </div>
-            <img
-              src="https://hdwallsource.com/img/2017/12/travis-scott-desktop-wallpaper-62068-63984-hd-wallpapers.jpg"
-              className="card-img-top"
-              alt="..."
-            />
           </div>
 
           <div className="card border-0">
@@ -137,7 +137,7 @@ class Charts extends Component {
               alt="..."
             />
             <div className="card-body text-center">
-              <h1 className="card-title mt-4">TOP ARTISTS</h1>
+              <h1 className="card-title display-5 mt-4">TOP ARTISTS</h1>
               <p className="card-text">Самые прослушиваемые исполнители</p>
               <button
                 onClick={this.topArtists}
@@ -162,7 +162,7 @@ class Charts extends Component {
                     ? `${elem.track.artist_name} - ${elem.track.track_name}`
                     : elem.artist.artist_name}
 
-                  <span class="badge badge-primary badge-pill">
+                  <span className="badge badge-primary badge-pill">
                     {elem.track
                       ? elem.track.track_rating
                       : elem.artist.artist_rating}

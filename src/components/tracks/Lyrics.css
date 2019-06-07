@@ -1,0 +1,10 @@
+.Album-more {
+  position: absolute;
+  right: 15px;
+  top: 10px;
+  transition: 0.5s transform ease;
+}
+
+.Album-more:hover {
+  transform: scale(1.3);
+}
