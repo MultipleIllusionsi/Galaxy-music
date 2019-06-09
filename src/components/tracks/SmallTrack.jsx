@@ -1,29 +1,33 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
-
+// d-none d-md-block
 class SmallTrack extends Component {
   render() {
     return (
-      <li className="list-group-item d-flex align-items-center">
-        <span className="mr-auto lead">{this.props.track.title}</span>
-        <span className="mr-5 d-none d-md-block">
+      <li className="list-group-item d-flex row align-items-center ">
+        <div className="lead col-lg-4  mt-3 text-center">
+          {this.props.track.artist.name} - {this.props.track.title}
+        </div>
+        <div className="offset-lg-1 col-lg-1  mt-3 text-center">
           Rating: {Math.round(this.props.track.rank / 10000)}
-        </span>
-        <strong className="mr-2 d-none d-md-block">
+        </div>
+        <div className="col-lg-1 mt-3 text-center">
           <i className="fas fa-forward" />
           {this.props.track.duration} sec
-        </strong>
-        <span className="mt-2">
+        </div>
+        <div className="mt-2 col-lg-3 text-center">
           <audio controls>
             <source src={this.props.track.preview} type="audio/mpeg" />
           </audio>
-        </span>
-        <Link
-          to={`/track/${this.props.track.id}`}
-          className="ml-2 btn btn-outline-dark btn-sm"
-        >
-          more...
-        </Link>
+        </div>
+        <div className="col-lg-2 text-right">
+          <Link
+            to={`/track/${this.props.track.id}`}
+            className="btn btn-outline-dark btn-sm"
+          >
+            more...
+          </Link>
+        </div>
       </li>
     );
   }
