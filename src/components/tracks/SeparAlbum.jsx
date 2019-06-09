@@ -1,8 +1,9 @@
 import React, { Component } from "react";
 import axios from "axios";
 import Spinner from "../layout/Spinner";
+import SmallTrack from "../tracks/SmallTrack";
 
-class Album extends Component {
+class SeparAlbum extends Component {
   state = {
     album: []
   };
@@ -11,7 +12,7 @@ class Album extends Component {
     axios
       .get(
         `https://cors-anywhere.herokuapp.com/https://api.deezer.com/album/${
-          this.props.album.id
+          this.props.match.params.id
         }`
       )
       .then(res => {
@@ -31,11 +32,11 @@ class Album extends Component {
     } else {
       return (
         <div>
-          <div className="text-center lead display-5 mt-5">
+          <div className="text-center lead display-5 mt-3">
             Album Information
           </div>
           <div className="row ">
-            <div className="col-md-6 mt-3">
+            <div className="offset-md-2 col-md-8 mt-3">
               <img
                 className="card-img-top mt-3 shadow-track"
                 src={album.cover_xl}
@@ -65,17 +66,11 @@ class Album extends Component {
               </ul>
             </div>
 
-            <div className="offset-md-1 col-md-5 mt-3">
-              <div className="text-center lead display-6 ">Tracklist</div>
+            <div className="col-md-12 mt-3">
+              <div className="text-center lead display-6 mt-5">Tracklist</div>
               <ul className="list-group shadow-track">
                 {album.tracks.data.map(track => (
-                  <li className="list-group-item d-flex justify-content-between">
-                    <span>{track.title}</span>
-                    <strong>
-                      <i className="fas fa-forward" />
-                      {track.duration} sec
-                    </strong>
-                  </li>
+                  <SmallTrack track={track} />
                 ))}
               </ul>
             </div>
@@ -86,4 +81,4 @@ class Album extends Component {
   }
 }
 
-export default Album;
+export default SeparAlbum;

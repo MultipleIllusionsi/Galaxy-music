@@ -1,39 +1,77 @@
 import React, { Component } from "react";
 import axios from "axios";
 import Track from "../tracks/Track";
+import Spinner from "../layout/Spinner";
+import { Link } from "react-router-dom";
+
 import "./Genre.css";
 
 class GenreType extends Component {
-  state = { data: [] };
+  state = { dataGenre: [], dataArtist: [], loading: false };
 
   componentDidMount() {
+    this.setState({ loading: true });
     axios
       .get(
-        `https://cors-anywhere.herokuapp.com/https://api.musixmatch.com/ws/1.1/track.search?q_track&page_size=10&f_music_genre_id=${
+        `https://cors-anywhere.herokuapp.com/https://api.deezer.com/genre/${
           this.props.match.params.id
-        }&page=1&s_track_rating=desc&apikey=${process.env.REACT_APP_MM_KEY}`
+        }`
       )
       .then(res => {
-        this.setState({ data: res.data.message.body.track_list });
+        this.setState({
+          dataGenre: res.data,
+          loading: false
+        });
+        return axios.get(
+          `https://cors-anywhere.herokuapp.com/https://api.deezer.com/genre/${
+            this.props.match.params.id
+          }/artists`
+        );
+      })
+      .then(res => {
+        this.setState({ dataArtist: res.data.data, loading: false });
       })
       .catch(err => console.log(err));
   }
 
   render() {
-    const { type, id } = this.props.match.params;
-    return (
-      <div>
-        {console.log(this.props.match.params)}
+    if (this.state.loading === true) {
+      return <Spinner />;
+    } else {
+      return (
         <div>
-          <h3 className="text-center my-4">{type.toUpperCase()} Top Songs</h3>
+          <div className="row justify-content-around">
+            <button
+              onClick={this.props.history.goBack}
+              className="btn btn-dark btn-sm my-4"
+            >
+              Go Back
+            </button>
+            <h3 className="my-4">{this.state.dataGenre.name} Top Artists</h3>
+          </div>
+
           <div className="row">
-            {this.state.data.map(item => (
-              <Track key={item.track.track_id} track={item.track} />
+            {this.state.dataArtist.map(item => (
+              <Link
+                className="card bg-dark text-white col-12 col-md-4"
+                to={`/genre/${this.props.match.params.id}/artist/${item.id}`}
+              >
+                <img
+                  src={item.picture_big}
+                  className="card-img"
+                  alt={item.name}
+                />
+                <div className="card-img-overlay d-flex justify-content-center align-items-center">
+                  <h1 className="card-title under">
+                    {item.name.toUpperCase()}
+                  </h1>
+                </div>
+              </Link>
             ))}
           </div>
         </div>
-      </div>
-    );
+      );
+    }
   }
 }
 

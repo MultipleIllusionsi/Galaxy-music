@@ -27,17 +27,13 @@ class Search extends Component {
     this.setState({ result: [], loading: true });
     axios
       .get(
-        `https://cors-anywhere.herokuapp.com/https://api.musixmatch.com/ws/1.1/track.search?${
+        `https://cors-anywhere.herokuapp.com/https://api.deezer.com/search?q=${
           this.state.queryType
-        }=${
-          this.state.queryTitle
-        }&page_size=10&page=1&s_track_rating=desc&apikey=${
-          process.env.REACT_APP_MM_KEY
-        }`
+        }:"${this.state.queryTitle}"`
       )
       .then(res => {
         this.setState({
-          result: res.data.message.body.track_list
+          result: res.data.data
         });
         this.setState({ queryTitle: "", loading: false });
       })
@@ -46,48 +42,37 @@ class Search extends Component {
 
   render() {
     return (
-      <div className="card card-body mb-4 p-4 ">
+      <div className="card card-body my-5 p-4 shadow-component">
         <h1 className="display-4 text-center ">
           <i className="fas fa-music" />
           Search
         </h1>
-        <p className="lead text-center">Get the Lyrics for any song</p>
         <form onSubmit={this.findTrack}>
           <div className="form-group">
             <ul className="lead d-flex align-items-center justify-content-around card-header">
               <li className="d-flex flex-column">
                 <label htmlFor="query">Song</label>
                 <input
+                  id="one"
                   className="checkmark"
                   type="radio"
                   name="query"
-                  value="q_track"
+                  value="track"
                   onChange={this.handleQuery}
-                  checked={this.state.queryType === "q_track"}
+                  checked={this.state.queryType === "track"}
                 />
               </li>
 
-              <li className="d-flex flex-column ml-5">
+              <li className="d-flex flex-column">
                 <label htmlFor="query">Artist</label>
                 <input
+                  id="two"
                   className="checkmark"
                   type="radio"
                   name="query"
-                  value="q_artist"
+                  value="artist"
                   onChange={this.handleQuery}
-                  checked={this.state.queryType === "q_artist"}
-                />
-              </li>
-
-              <li className="d-flex flex-column ">
-                <label htmlFor="query">Song's words</label>
-                <input
-                  className="checkmark"
-                  type="radio"
-                  name="query"
-                  value="q_lyrics"
-                  onChange={this.handleQuery}
-                  checked={this.state.queryType === "q_lyrics"}
+                  checked={this.state.queryType === "artist"}
                 />
               </li>
             </ul>
@@ -114,9 +99,9 @@ class Search extends Component {
           <div>
             <h3 className="text-center mb-4 ">Search Songs</h3>
             <div className="row">
-              {this.state.result.map(item => {
-                console.log(item);
-                return <Track key={item.track.track_id} track={item.track} />;
+              {this.state.result.map(track => {
+                console.log(track);
+                return <Track key={track.id} track={track} />;
               })}
             </div>
           </div>

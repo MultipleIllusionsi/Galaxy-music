@@ -7,7 +7,9 @@ import Lyrics from "./components/tracks/Lyrics";
 import Charts from "./components/tracks/Charts";
 import Genre from "./components/tracks/Genre";
 import GenreType from "./components/tracks/GenreType";
+import GenreArtist from "./components/tracks/GenreArtist";
 import Album from "./components/tracks/Album";
+import SeparAlbum from "./components/tracks/SeparAlbum";
 
 import "./App.css";
 
@@ -22,9 +24,14 @@ function App() {
             <Route exact path="/charts" component={Charts} />
             <Route exact path="/charts/:top" component={Charts} />
             <Route exact path="/genre" component={Genre} />
-            <Route exact path="/genre/:type/:id" component={GenreType} />
-            <Route exact path="/lyrics/track/:id" component={Lyrics} />
-            <Route exact path="/lyrics/album/:id" component={Album} />
+            <Route exact path="/genre/:id" component={GenreType} />
+            <Route
+              exact
+              path="/genre/:id/artist/:artist_id"
+              component={GenreArtist}
+            />
+            <Route exact path="/track/:id" component={Lyrics} />
+            <Route exact path="/album/:id" component={SeparAlbum} />
             <Route path="*">empty section</Route>
           </Switch>
         </div>
