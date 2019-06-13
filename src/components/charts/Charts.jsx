@@ -1,8 +1,10 @@
 import React, { Component } from "react";
 import axios from "axios";
 import Spinner from "../layout/Spinner";
-import SmallTrack from "../tracks/SmallTrack";
+import SmallTrack from "../track/SmallTrack";
 import { Link } from "react-router-dom";
+
+import "./Charts.css";
 
 class Charts extends Component {
   state = {
@@ -119,7 +121,7 @@ class Charts extends Component {
               role="tabpanel"
               aria-labelledby="albums-tab"
             >
-              <div className="card mt-5 shadow-track">
+              <div className="card mt-5 text-center shadow-track">
                 <div className="card-header lead display-5 text-center ">
                   TOP ALBUMS
                 </div>
@@ -157,9 +159,28 @@ class Charts extends Component {
             >
               <div className="card mt-5 text-center shadow-track">
                 <div className="card-header lead display-5">TOP ARTISTS</div>
-                <ul class="list-group list-group-flush">
+                <ul class="row justify-content-around">
                   {this.state.topArtists.map(elem => (
-                    <li class="list-group-item">{elem.name}</li>
+                    <li className="card col-md-5 mt-5 shadow-track border-track">
+                      <img
+                        src={elem.picture_big}
+                        className="card-img-top"
+                        alt="cover"
+                      />
+                      <div class="card-body">
+                        <div className="card-title">
+                          <strong>Position</strong>: {elem.position} -{" "}
+                          {elem.name}
+                        </div>
+
+                        <Link
+                          to={`/artist/${elem.id}`}
+                          className="btn btn-outline-dark "
+                        >
+                          more...
+                        </Link>
+                      </div>
+                    </li>
                   ))}
                 </ul>
               </div>
@@ -173,9 +194,30 @@ class Charts extends Component {
             >
               <div className="card mt-5 text-center shadow-track">
                 <div className="card-header lead display-5 ">TOP PLAYLISTS</div>
-                <ul class="list-group list-group-flush">
+                <ul class="row justify-content-around">
                   {this.state.topPlaylists.map(elem => (
-                    <li class="list-group-item">{elem.title}</li>
+                    <li className="card col-md-5 mt-5 shadow-track border-track">
+                      <img
+                        src={elem.picture_big}
+                        className="card-img-top"
+                        alt="cover"
+                      />
+                      <div class="card-body">
+                        <div className="card-title">
+                          {elem.title}
+                          <div className="card-body">
+                            Tracks: {elem.nb_tracks}
+                          </div>
+                        </div>
+
+                        <Link
+                          to={`/playlist/${elem.id}`}
+                          className="btn btn-outline-dark "
+                        >
+                          more...
+                        </Link>
+                      </div>
+                    </li>
                   ))}
                 </ul>
               </div>

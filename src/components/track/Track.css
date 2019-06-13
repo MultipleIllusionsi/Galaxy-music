@@ -1,0 +1,9 @@
+.border-track {
+  transition: transform 0.2s ease-out;
+}
+
+.border-track:hover {
+  transform: scale(1.05);
+  box-sizing: border-box;
+  z-index: 9999;
+}

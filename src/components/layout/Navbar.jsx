@@ -6,13 +6,18 @@ import { NavLink } from "react-router-dom";
 const Navbar = () => {
   return (
     <nav className="navbar navbar-dark bg-dark text-center Nav-bar">
-      <div className=" navbar-brand display-5 m-0  col-12 col-md-6">
-        Diplom Music Project
+      <div
+        role="navigation"
+        className="navbar-nav display-5 col-12 col-md-6 justify-content-center"
+      >
+        <NavLink className="nav-item nav-link" to="/" activeClassName="active">
+          Diplom Music Project
+        </NavLink>
       </div>
 
       <div role="navigation" className="navbar-nav h4 p-0 col-12 col-md-6">
         <NavLink
-          className="nav-item nav-link col-4 col-md-3 offset-md-3"
+          className="nav-item nav-link col-4 col-md-4 offset-md-2"
           to="/charts"
           activeClassName="active"
         >
@@ -27,7 +32,7 @@ const Navbar = () => {
         </NavLink>
         <NavLink
           className="nav-item nav-link col-4 col-md-3"
-          to="/"
+          to="/search"
           activeClassName="active"
         >
           Search

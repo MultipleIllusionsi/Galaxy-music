@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 import Spinner from "../layout/Spinner";
-import SmallTrack from "../tracks/SmallTrack";
+import SmallTrack from "../track/SmallTrack";
 import { Link } from "react-router-dom";
-import Album from "./Album";
+import Album from "../album/Album";
 import axios from "axios";
 
 class GenreArtist extends Component {

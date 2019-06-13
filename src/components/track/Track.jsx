@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import "./Track.css";
 import { Link } from "react-router-dom";
 
 //ЕДИНИЧНЫЙ БЛОК ТРЕКА

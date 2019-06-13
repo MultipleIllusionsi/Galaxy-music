@@ -5,7 +5,7 @@ class SmallTrack extends Component {
   render() {
     return (
       <li className="list-group-item d-flex row align-items-center ">
-        <div className="lead col-lg-4  mt-3 text-center">
+        <div className="lead col-lg-4  mt-3">
           {this.props.track.artist.name} - {this.props.track.title}
         </div>
         <div className="offset-lg-1 col-lg-1  mt-3 text-center">

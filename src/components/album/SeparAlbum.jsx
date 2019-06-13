@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import axios from "axios";
 import Spinner from "../layout/Spinner";
-import SmallTrack from "../tracks/SmallTrack";
+import SmallTrack from "../track/SmallTrack";
 
 class SeparAlbum extends Component {
   state = {
@@ -32,6 +32,12 @@ class SeparAlbum extends Component {
     } else {
       return (
         <div>
+          <button
+            onClick={this.props.history.goBack}
+            className="btn btn-dark btn-sm ml-5 mt-3"
+          >
+            Go Back
+          </button>
           <div className="text-center lead display-5 mt-3">
             Album Information
           </div>
@@ -67,8 +73,8 @@ class SeparAlbum extends Component {
             </div>
 
             <div className="col-md-12 mt-3">
-              <div className="text-center lead display-6 mt-5">Tracklist</div>
-              <ul className="list-group shadow-track">
+              <div className="text-center lead display-5 mt-5">Tracklist</div>
+              <ul className="list-group shadow-track mt-3">
                 {album.tracks.data.map(track => (
                   <SmallTrack track={track} />
                 ))}

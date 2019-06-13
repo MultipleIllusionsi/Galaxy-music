@@ -3,7 +3,7 @@
   width: 25px;
   position: relative;
   left: 30%;
-  transition: transform 0.5s ease-out;
+  transition: transform 0.3s ease-out;
 }
 
 input {
@@ -16,4 +16,8 @@ input {
 
 li {
   list-style-type: none;
+}
+
+.Search-header {
+  font-weight: lighter;
 }

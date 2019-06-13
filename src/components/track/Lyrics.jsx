@@ -3,7 +3,7 @@ import axios from "axios";
 import { Link } from "react-router-dom";
 import Spinner from "../layout/Spinner";
 import Moment from "react-moment";
-import Album from "./Album";
+import Album from "../album/Album";
 import "./Lyrics.css";
 //СТРАНИЦА ПРИ НАЖАТИИ > VIEW LYRICS
 
