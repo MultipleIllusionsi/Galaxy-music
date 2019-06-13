@@ -61,7 +61,7 @@ class Playlist extends Component {
                     onClick={this.getTracks}
                     className="btn btn-outline-primary btn-sm mt-2"
                   >
-                    Check Albums
+                    Check
                   </button>
                 </li>
               </ul>
