@@ -209,7 +209,6 @@ class Charts extends Component {
                             Tracks: {elem.nb_tracks}
                           </div>
                         </div>
-
                         <Link
                           to={`/playlist/${elem.id}`}
                           className="btn btn-outline-dark "

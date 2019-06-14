@@ -4,23 +4,22 @@ import { Link } from "react-router-dom";
 class SmallTrack extends Component {
   render() {
     return (
-      <li className="list-group-item d-flex row align-items-center ">
-        <div className="lead col-lg-4  mt-3">
+      <li className="list-group-item d-flex row align-items-center py-3">
+        <div className="col-8 col-md-4">
+          <i className="fas fa-play mr-2" />
           {this.props.track.artist.name} - {this.props.track.title}
         </div>
-        <div className="offset-lg-1 col-lg-1  mt-3 text-center">
+        <div className="col-4 col-md-2 text-center">
+          <i className="fas fa-star mr-2" />
           Rating: {Math.round(this.props.track.rank / 10000)}
         </div>
-        <div className="col-lg-1 mt-3 text-center">
-          <i className="fas fa-forward" />
-          {this.props.track.duration} sec
-        </div>
-        <div className="mt-2 col-lg-3 text-center">
+
+        <div className="col-8 col-md-4 mt-2">
           <audio controls>
             <source src={this.props.track.preview} type="audio/mpeg" />
           </audio>
         </div>
-        <div className="col-lg-2 text-right">
+        <div className="col-4 offset-md-1 col-md-1 text-center">
           <Link
             to={`/track/${this.props.track.id}`}
             className="btn btn-outline-dark btn-sm"

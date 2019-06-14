@@ -60,13 +60,6 @@ a.nav-link:active {
   padding: 0;
 }
 
-@media (min-width: 576px) and (max-width: 767.98px) {
-  .container .max {
-    height: 89.4vh;
-    padding: 0;
-  }
-}
-
 .navbar-brand {
   color: lightcyan;
 }
@@ -85,4 +78,8 @@ a.nav-link:active {
 
 .display-6 {
   font-size: 1.3em;
+}
+
+.card {
+  border-radius: 0;
 }
