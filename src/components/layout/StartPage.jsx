@@ -7,8 +7,10 @@ class StartPage extends Component {
   render() {
     return (
       <div className="StartPage max shadow-component">
-        <h1 className="text-center StartPage-header pt-5">Music App</h1>
-        <div className="row mt-5 text-center">
+        <h1 className="text-center d-none d-md-block StartPage-header pt-5">
+          Music App
+        </h1>
+        <div className="row pt-5 text-center">
           <div class="card col-12 col-md-4">
             <div class="card-body">
               <p class="card-text">

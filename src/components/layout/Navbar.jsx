@@ -8,7 +8,7 @@ const Navbar = () => {
     <nav className="navbar navbar-dark bg-dark text-center Nav-bar">
       <div
         role="navigation"
-        className="navbar-nav display-5 col-12 col-md-6 justify-content-center"
+        className="navbar-nav display-5 d-none d-md-block col-md-6 justify-content-center"
       >
         <NavLink className="nav-item nav-link" to="/" activeClassName="active">
           Diplom Music Project
