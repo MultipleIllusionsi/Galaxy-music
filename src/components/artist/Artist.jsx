@@ -10,7 +10,6 @@ class Artist extends Component {
     artist_top: [],
     artist_album: [],
     activeData: "",
-    check: false,
     loading: false
   };
 
@@ -19,7 +18,7 @@ class Artist extends Component {
     axios
       .get(
         `https://cors-anywhere.herokuapp.com/https://api.deezer.com/artist/${
-          this.props.match.params.id
+          this.props.match.params.artist_id
         }`
       )
       .then(res => {
@@ -37,7 +36,7 @@ class Artist extends Component {
     axios
       .get(
         `https://cors-anywhere.herokuapp.com/https://api.deezer.com/artist/${
-          this.props.match.params.id
+          this.props.match.params.artist_id
         }/top?limit=10`
       )
       .then(res => {
@@ -55,7 +54,7 @@ class Artist extends Component {
     axios
       .get(
         `https://cors-anywhere.herokuapp.com/https://api.deezer.com/artist/${
-          this.props.match.params.id
+          this.props.match.params.artist_id
         }/albums`
       )
       .then(res => {

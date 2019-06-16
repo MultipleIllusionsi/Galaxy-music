@@ -42,9 +42,9 @@ class Charts extends Component {
             id="myTab"
             role="tablist"
           >
-            <li class="nav-item col-md-3 text-center">
+            <li class="nav-item col-md-3 text-center ">
               <a
-                class="nav-link active display-5"
+                class="nav-link active display-5 py-3"
                 id="tracks-tab"
                 data-toggle="tab"
                 href="#tracks"
@@ -57,7 +57,7 @@ class Charts extends Component {
             </li>
             <li class="nav-item col-md-3 text-center">
               <a
-                class="nav-link display-5"
+                class="nav-link display-5 py-3"
                 id="albums-tab"
                 data-toggle="tab"
                 href="#albums"
@@ -70,7 +70,7 @@ class Charts extends Component {
             </li>
             <li class="nav-item col-md-3 text-center">
               <a
-                class="nav-link display-5"
+                class="nav-link display-5 py-3"
                 id="artists-tab"
                 data-toggle="tab"
                 href="#artists"
@@ -83,7 +83,7 @@ class Charts extends Component {
             </li>
             <li class="nav-item col-md-3 text-center">
               <a
-                class="nav-link display-5"
+                class="nav-link display-5 py-3"
                 id="playlists-tab"
                 data-toggle="tab"
                 href="#playlists"

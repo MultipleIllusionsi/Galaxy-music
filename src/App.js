@@ -7,7 +7,6 @@ import Lyrics from "./components/track/Lyrics";
 import Charts from "./components/charts/Charts";
 import Genre from "./components/genre/Genre";
 import GenreType from "./components/genre/GenreType";
-import GenreArtist from "./components/genre/GenreArtist";
 import SeparAlbum from "./components/album/SeparAlbum";
 import StartPage from "./components/layout/StartPage";
 import Playlist from "./components/playlist/Playlist";
@@ -31,12 +30,12 @@ function App() {
             <Route
               exact
               path="/genre/:id/artist/:artist_id"
-              component={GenreArtist}
+              component={Artist}
             />
             <Route exact path="/track/:id" component={Lyrics} />
             <Route exact path="/album/:id" component={SeparAlbum} />
             <Route exact path="/playlist/:id" component={Playlist} />
-            <Route exact path="/artist/:id" component={Artist} />
+            <Route exact path="/artist/:artist_id" component={Artist} />
             <Route path="*">empty section</Route>
           </Switch>
         </div>
