@@ -1,13 +1,11 @@
 import React, { Component, Fragment } from "react";
 import axios from "axios";
-import { Link } from "react-router-dom";
 import Spinner from "../layout/Spinner";
 import Moment from "react-moment";
 import Album from "../album/Album";
-import "./Lyrics.css";
-//СТРАНИЦА ПРИ НАЖАТИИ > VIEW LYRICS
+import "./SeparTrack.css";
 
-class Lyrics extends Component {
+class SeparateTrack extends Component {
   state = {
     track: {},
     moreActive: false
@@ -62,14 +60,14 @@ class Lyrics extends Component {
                   <span className="text-secondary"> {track.artist.name}</span>
                 </div>
                 <ul className="list-group list-group-flush display-6">
-                  <li className="list-group-item">
+                  <li className="list-group-item d-flex">
                     <strong>Album Name:</strong>
                     <span>{track.album.title}</span>
 
                     <button
                       to={`/album/${track.album_id}`}
                       onClick={this.handleAlbum}
-                      className="Album-more btn btn-outline-primary btn-sm ml-5"
+                      className="Album-more btn btn-outline-primary btn-sm ml-auto"
                     >
                       more...
                     </button>
@@ -105,4 +103,4 @@ class Lyrics extends Component {
     }
   }
 }
-export default Lyrics;
+export default SeparateTrack;

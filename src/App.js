@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
 import Navbar from "./components/layout/Navbar";
 import Search from "./components/search/Search";
-import Lyrics from "./components/track/Lyrics";
+import SeparTrack from "./components/track/SeparTrack";
 import Charts from "./components/charts/Charts";
 import Genre from "./components/genre/Genre";
 import GenreType from "./components/genre/GenreType";
@@ -32,7 +32,7 @@ function App() {
               path="/genre/:id/artist/:artist_id"
               component={Artist}
             />
-            <Route exact path="/track/:id" component={Lyrics} />
+            <Route exact path="/track/:id" component={SeparTrack} />
             <Route exact path="/album/:id" component={SeparAlbum} />
             <Route exact path="/playlist/:id" component={Playlist} />
             <Route exact path="/artist/:artist_id" component={Artist} />

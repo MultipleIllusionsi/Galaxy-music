@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
-// d-none d-md-block
+
 class SmallTrack extends Component {
   render() {
     return (

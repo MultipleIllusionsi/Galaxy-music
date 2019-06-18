@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import axios from "axios";
-import Track from "../track/Track";
+import SearchTrack from "../track/SearchTrack";
 import Spinner from "../layout/Spinner";
 
 import "./Search.css";
@@ -102,7 +102,7 @@ class Search extends Component {
                 <h3 className="text-center mb-4 ">Found Songs</h3>
                 <div className="row">
                   {this.state.result.map(track => {
-                    return <Track key={track.id} track={track} />;
+                    return <SearchTrack key={track.id} track={track} />;
                   })}
                 </div>
               </div>

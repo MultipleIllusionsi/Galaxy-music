@@ -1,10 +1,10 @@
-import React, { Component } from "react";
-import "./Track.css";
+import React from "react";
+import "./SearchTrack.css";
 import { Link } from "react-router-dom";
 
 //ЕДИНИЧНЫЙ БЛОК ТРЕКА
 
-const Track = props => {
+const SearchTrack = props => {
   const { track } = props;
   return (
     <div className="col-md-6">
@@ -36,4 +36,4 @@ const Track = props => {
   );
 };
 
-export default Track;
+export default SearchTrack;
