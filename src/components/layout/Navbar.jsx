@@ -17,21 +17,21 @@ const Navbar = () => {
 
       <div role="navigation" className="navbar-nav h4 p-0 col-12 col-md-6">
         <NavLink
-          className="nav-item nav-link col-4 col-md-4 offset-md-2"
+          className="nav-item nav-link col-4 col-md-4"
           to="/charts"
           activeClassName="active"
         >
-          Top Charts
+          Charts
         </NavLink>
         <NavLink
-          className="nav-item nav-link col-4 col-md-3"
+          className="nav-item nav-link col-4 col-md-4"
           to="/genre"
           activeClassName="active"
         >
           Genres
         </NavLink>
         <NavLink
-          className="nav-item nav-link col-4 col-md-3"
+          className="nav-item nav-link col-4 col-md-4"
           to="/search"
           activeClassName="active"
         >
