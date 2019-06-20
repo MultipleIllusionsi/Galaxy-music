@@ -42,7 +42,7 @@ class SeparAlbum extends Component {
             Album Information
           </div>
           <div className="row ">
-            <div className="offset-md-2 col-md-8 mt-3">
+            <div className="offset-md-3 col-md-6 mt-3">
               <img
                 className="card-img-top mt-3 shadow-track"
                 src={album.cover_xl}

@@ -67,15 +67,17 @@ class Playlist extends Component {
               </ul>
             </div>
             {this.state.check && (
-              <ul className="list-group shadow-track mt-5">
-                <li className="list-group-item text-center lead display-5 py-3">
-                  Playlist
-                </li>
+              <div className="col-md-12 mt-3">
+                <ul className="list-group shadow-track mt-5">
+                  <li className="list-group-item text-center lead display-5 py-3">
+                    Playlist
+                  </li>
 
-                {playlist.tracks.data.map(track => (
-                  <SmallTrack track={track} />
-                ))}
-              </ul>
+                  {playlist.tracks.data.map(track => (
+                    <SmallTrack track={track} />
+                  ))}
+                </ul>
+              </div>
             )}
           </div>
         </div>
