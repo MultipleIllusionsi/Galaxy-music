@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import axios from "axios";
 import Spinner from "../layout/Spinner";
 import SmallTrack from "../track/SmallTrack";
-import { Link } from "react-router-dom";
 
 class Playlist extends Component {
   state = { playlist: [], loading: false, check: false };
