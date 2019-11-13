@@ -6,7 +6,7 @@ const Navbar = () => (
   <header className="header">
     <nav className="navbar">
       <ul className="navbar__list">
-        <li className="navbar__list-item">
+        <li className="navbar__list-item logo">
           <NavLink to="/">Galaxy</NavLink>
         </li>
         <li className="navbar__list-item">
