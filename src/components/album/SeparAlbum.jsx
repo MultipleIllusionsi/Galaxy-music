@@ -1,19 +1,17 @@
 import React, { Component } from "react";
 import axios from "axios";
-import Spinner from "../layout/Spinner";
+import Spinner from "../spinner/Spinner";
 import SmallTrack from "../track/SmallTrack";
 
 class SeparAlbum extends Component {
   state = {
-    album: []
+    album: [],
   };
 
   componentDidMount() {
     axios
       .get(
-        `https://cors-anywhere.herokuapp.com/https://api.deezer.com/album/${
-          this.props.match.params.id
-        }`
+        `https://cors-anywhere.herokuapp.com/https://api.deezer.com/album/${this.props.match.params.id}`
       )
       .then(res => {
         this.setState({ album: res.data });
@@ -27,7 +25,9 @@ class SeparAlbum extends Component {
       return <Spinner />;
     } else if (album.nb_tracks < 2) {
       return (
-        <div className="text-center lead display-5 mt-5">Album not found</div>
+        <div className="text-center lead display-5 mt-5">
+          Album not found
+        </div>
       );
     } else {
       return (
@@ -73,7 +73,9 @@ class SeparAlbum extends Component {
             </div>
 
             <div className="col-md-12 mt-3">
-              <div className="text-center lead display-5 mt-5">Tracklist</div>
+              <div className="text-center lead display-5 mt-5">
+                Tracklist
+              </div>
               <ul className="list-group shadow-track mt-3">
                 {album.tracks.data.map(track => (
                   <SmallTrack track={track} />

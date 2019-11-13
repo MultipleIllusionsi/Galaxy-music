@@ -1,9 +1,9 @@
 import React, { Component } from "react";
 import axios from "axios";
-import Spinner from "../layout/Spinner";
+import Spinner from "../spinner/Spinner";
 import { Link } from "react-router-dom";
 
-import "./Genre.css";
+import "./Genre.scss";
 
 class GenreType extends Component {
   state = { dataGenre: [], dataArtist: [], loading: false };
@@ -12,23 +12,22 @@ class GenreType extends Component {
     this.setState({ loading: true });
     axios
       .get(
-        `https://cors-anywhere.herokuapp.com/https://api.deezer.com/genre/${
-          this.props.match.params.id
-        }`
+        `https://cors-anywhere.herokuapp.com/https://api.deezer.com/genre/${this.props.match.params.id}`
       )
       .then(res => {
         this.setState({
           dataGenre: res.data,
-          loading: false
+          loading: false,
         });
         return axios.get(
-          `https://cors-anywhere.herokuapp.com/https://api.deezer.com/genre/${
-            this.props.match.params.id
-          }/artists`
+          `https://cors-anywhere.herokuapp.com/https://api.deezer.com/genre/${this.props.match.params.id}/artists`
         );
       })
       .then(res => {
-        this.setState({ dataArtist: res.data.data, loading: false });
+        this.setState({
+          dataArtist: res.data.data,
+          loading: false,
+        });
       })
       .catch(err => console.log(err));
   }
@@ -46,7 +45,9 @@ class GenreType extends Component {
             >
               Go Back
             </button>
-            <h3 className="my-4">{this.state.dataGenre.name} Top Artists</h3>
+            <h3 className="my-4">
+              {this.state.dataGenre.name} Top Artists
+            </h3>
           </div>
 
           <div className="row">

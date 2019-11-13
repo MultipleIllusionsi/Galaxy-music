@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import axios from "axios";
-import Spinner from "../layout/Spinner";
+import Spinner from "../spinner/Spinner";
 import SmallTrack from "../track/SmallTrack";
 import { Link } from "react-router-dom";
 
@@ -10,21 +10,19 @@ class Artist extends Component {
     artist_top: [],
     artist_album: [],
     activeData: "",
-    loading: false
+    loading: false,
   };
 
   componentDidMount() {
     this.setState({ loading: true });
     axios
       .get(
-        `https://cors-anywhere.herokuapp.com/https://api.deezer.com/artist/${
-          this.props.match.params.artist_id
-        }`
+        `https://cors-anywhere.herokuapp.com/https://api.deezer.com/artist/${this.props.match.params.artist_id}`
       )
       .then(res => {
         this.setState({
           artist_info: res.data,
-          loading: false
+          loading: false,
         });
       })
 
@@ -35,15 +33,13 @@ class Artist extends Component {
     this.setState({ loading: true });
     axios
       .get(
-        `https://cors-anywhere.herokuapp.com/https://api.deezer.com/artist/${
-          this.props.match.params.artist_id
-        }/top?limit=10`
+        `https://cors-anywhere.herokuapp.com/https://api.deezer.com/artist/${this.props.match.params.artist_id}/top?limit=10`
       )
       .then(res => {
         this.setState({
           artist_top: res.data.data,
           activeData: "tracklist",
-          loading: false
+          loading: false,
         });
       })
       .catch(err => console.log(err));
@@ -53,22 +49,25 @@ class Artist extends Component {
     this.setState({ loading: true });
     axios
       .get(
-        `https://cors-anywhere.herokuapp.com/https://api.deezer.com/artist/${
-          this.props.match.params.artist_id
-        }/albums`
+        `https://cors-anywhere.herokuapp.com/https://api.deezer.com/artist/${this.props.match.params.artist_id}/albums`
       )
       .then(res => {
         this.setState({
           artist_album: res.data.data,
           activeData: "albums",
-          loading: false
+          loading: false,
         });
       })
       .catch(err => console.log(err));
   };
 
   render() {
-    const { artist_info, artist_top, artist_album, activeData } = this.state;
+    const {
+      artist_info,
+      artist_top,
+      artist_album,
+      activeData,
+    } = this.state;
     if (this.state.loading === true) {
       return <Spinner />;
     } else {
@@ -89,8 +88,12 @@ class Artist extends Component {
               />
 
               <ul className="list-group shadow-track text-center">
-                <li className="list-group-item lead">{artist_info.name}</li>
-                <li className="list-group-item">Fans: {artist_info.nb_fan}</li>
+                <li className="list-group-item lead">
+                  {artist_info.name}
+                </li>
+                <li className="list-group-item">
+                  Fans: {artist_info.nb_fan}
+                </li>
                 <li className="list-group-item">
                   Albums: {artist_info.nb_album}
                   <div className="d-flex justify-content-around mt-2">
@@ -146,7 +149,9 @@ class Artist extends Component {
                               {artist_info.name} - {elem.title}
                             </div>
                             <div>Fans: {elem.fans}</div>
-                            <div>Release date: {elem.release_date}</div>
+                            <div>
+                              Release date: {elem.release_date}
+                            </div>
                           </div>
 
                           <Link

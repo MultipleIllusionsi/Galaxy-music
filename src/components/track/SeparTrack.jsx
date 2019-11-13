@@ -1,14 +1,14 @@
 import React, { Component, Fragment } from "react";
 import axios from "axios";
-import Spinner from "../layout/Spinner";
+import Spinner from "../spinner/Spinner";
 import Moment from "react-moment";
 import Album from "../album/Album";
-import "./SeparTrack.css";
+import "./SeparTrack.scss";
 
 class SeparateTrack extends Component {
   state = {
     track: {},
-    moreActive: false
+    moreActive: false,
   };
 
   handleAlbum = () => {
@@ -19,9 +19,7 @@ class SeparateTrack extends Component {
     console.log(this.props.match.params.id);
     axios
       .get(
-        `https://cors-anywhere.herokuapp.com/https://api.deezer.com/track/${
-          this.props.match.params.id
-        }`
+        `https://cors-anywhere.herokuapp.com/https://api.deezer.com/track/${this.props.match.params.id}`
       )
       .then(res => {
         console.log(res);
@@ -57,7 +55,10 @@ class SeparateTrack extends Component {
               <div className="col-md-7">
                 <div className="card-header display-5">
                   {track.title} by
-                  <span className="text-secondary"> {track.artist.name}</span>
+                  <span className="text-secondary">
+                    {" "}
+                    {track.artist.name}
+                  </span>
                 </div>
                 <ul className="list-group list-group-flush display-6">
                   <li className="list-group-item d-flex">
@@ -83,13 +84,18 @@ class SeparateTrack extends Component {
                   </li>
                   <li className="list-group-item">
                     <strong>Release Date: </strong>
-                    <Moment format="MM/DD/YYYY">{track.release_date}</Moment>
+                    <Moment format="MM/DD/YYYY">
+                      {track.release_date}
+                    </Moment>
                   </li>
                   <li className="list-group-item text-center">
                     <strong>Preview: </strong>
                     <div>
                       <audio controls>
-                        <source src={track.preview} type="audio/mpeg" />
+                        <source
+                          src={track.preview}
+                          type="audio/mpeg"
+                        />
                       </audio>
                     </div>
                   </li>

@@ -1,8 +1,6 @@
 import React from "react";
-import "./SearchTrack.css";
+import "./SearchTrack.scss";
 import { Link } from "react-router-dom";
-
-//ЕДИНИЧНЫЙ БЛОК ТРЕКА
 
 const SearchTrack = props => {
   const { track } = props;
@@ -27,7 +25,10 @@ const SearchTrack = props => {
               Duration: {track.duration} sec
             </strong>
           </p>
-          <Link to={`/track/${track.id}`} className="btn btn-dark btn-block">
+          <Link
+            to={`/track/${track.id}`}
+            className="btn btn-dark btn-block"
+          >
             <i className="fas fa-chevron-right" /> See more
           </Link>
         </div>

@@ -1,10 +1,10 @@
 import React, { Component } from "react";
 import axios from "axios";
-import Spinner from "../layout/Spinner";
+import Spinner from "../spinner/Spinner";
 import SmallTrack from "../track/SmallTrack";
 import { Link } from "react-router-dom";
 
-import "./Charts.css";
+import "./Charts.scss";
 
 class Charts extends Component {
   state = {
@@ -12,20 +12,22 @@ class Charts extends Component {
     topAlbums: [],
     topArtists: [],
     topPlaylists: [],
-    loading: false
+    loading: false,
   };
 
   componentDidMount() {
     this.setState({ loading: true });
     axios
-      .get(`https://cors-anywhere.herokuapp.com/https://api.deezer.com/chart`)
+      .get(
+        `https://cors-anywhere.herokuapp.com/https://api.deezer.com/chart`
+      )
       .then(res => {
         this.setState({
           topTracks: res.data.tracks.data,
           topAlbums: res.data.albums.data,
           topArtists: res.data.artists.data,
           topPlaylists: res.data.playlists.data,
-          loading: false
+          loading: false,
         });
       })
       .catch(err => console.log(err));
@@ -158,7 +160,9 @@ class Charts extends Component {
               aria-labelledby="artists-tab"
             >
               <div className="card mt-5 text-center shadow-track">
-                <div className="card-header lead display-5">TOP ARTISTS</div>
+                <div className="card-header lead display-5">
+                  TOP ARTISTS
+                </div>
                 <ul class="row justify-content-around">
                   {this.state.topArtists.map(elem => (
                     <li className="card col-md-5 mt-5 shadow-track border-track">
@@ -193,7 +197,9 @@ class Charts extends Component {
               aria-labelledby="playlists-tab"
             >
               <div className="card mt-5 text-center shadow-track">
-                <div className="card-header lead display-5 ">TOP PLAYLISTS</div>
+                <div className="card-header lead display-5 ">
+                  TOP PLAYLISTS
+                </div>
                 <ul class="row justify-content-around">
                   {this.state.topPlaylists.map(elem => (
                     <li className="card col-md-5 mt-5 shadow-track border-track">

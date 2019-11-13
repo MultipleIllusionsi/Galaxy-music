@@ -1,0 +1,28 @@
+.header {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+}
+
+.navbar {
+  position: relative;
+
+  &__list {
+    padding: 1rem;
+    display: flex;
+    width: 100%;
+    font-size: 3rem;
+
+    &-item {
+      color: white;
+      padding: 0 2rem;
+      &:nth-child(2) {
+        margin-left: auto;
+      }
+      &:last-child {
+        margin-right: 5%;
+      }
+    }
+  }
+}

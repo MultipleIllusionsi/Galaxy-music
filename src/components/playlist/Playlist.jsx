@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import axios from "axios";
-import Spinner from "../layout/Spinner";
+import Spinner from "../spinner/Spinner";
 import SmallTrack from "../track/SmallTrack";
 
 class Playlist extends Component {
@@ -10,14 +10,12 @@ class Playlist extends Component {
     this.setState({ loading: true });
     axios
       .get(
-        `https://cors-anywhere.herokuapp.com/https://api.deezer.com/playlist/${
-          this.props.match.params.id
-        }`
+        `https://cors-anywhere.herokuapp.com/https://api.deezer.com/playlist/${this.props.match.params.id}`
       )
       .then(res => {
         this.setState({
           playlist: res.data,
-          loading: false
+          loading: false,
         });
       })
       .catch(err => console.log(err));
@@ -49,9 +47,13 @@ class Playlist extends Component {
               />
 
               <ul className="list-group shadow-track text-center">
-                <li className="list-group-item lead">{playlist.title}</li>
+                <li className="list-group-item lead">
+                  {playlist.title}
+                </li>
                 {playlist.description && (
-                  <li className="list-group-item">{playlist.description}</li>
+                  <li className="list-group-item">
+                    {playlist.description}
+                  </li>
                 )}
 
                 <li className="list-group-item">

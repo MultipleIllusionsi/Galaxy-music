@@ -1,16 +1,16 @@
 import React, { Component } from "react";
 import axios from "axios";
 import SearchTrack from "../track/SearchTrack";
-import Spinner from "../layout/Spinner";
+import Spinner from "../spinner/Spinner";
 
-import "./Search.css";
+import "./Search.scss";
 
 class Search extends Component {
   state = {
     queryTitle: "",
     queryType: "",
     result: [],
-    loading: false
+    loading: false,
   };
 
   onChange = e => {
@@ -26,13 +26,11 @@ class Search extends Component {
     this.setState({ result: [], loading: true });
     axios
       .get(
-        `https://cors-anywhere.herokuapp.com/https://api.deezer.com/search?q=${
-          this.state.queryType
-        }:"${this.state.queryTitle}"`
+        `https://cors-anywhere.herokuapp.com/https://api.deezer.com/search?q=${this.state.queryType}:"${this.state.queryTitle}"`
       )
       .then(res => {
         this.setState({
-          result: res.data.data
+          result: res.data.data,
         });
         this.setState({ queryTitle: "", loading: false });
       })
@@ -102,7 +100,9 @@ class Search extends Component {
                 <h3 className="text-center mb-4 ">Found Songs</h3>
                 <div className="row">
                   {this.state.result.map(track => {
-                    return <SearchTrack key={track.id} track={track} />;
+                    return (
+                      <SearchTrack key={track.id} track={track} />
+                    );
                   })}
                 </div>
               </div>
