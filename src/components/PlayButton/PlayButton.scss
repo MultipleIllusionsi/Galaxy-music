@@ -1,4 +1,4 @@
-.play-button {
+.play-button__usual {
     background-image: url(../../assets/icons.png);
     height: 7rem;
     width: 7rem;
@@ -8,5 +8,20 @@
 
     &:hover {
         background-position: -13rem -769.1rem;
+    }
+}
+
+.play-button__hover {
+    background-image: url(../../assets/icons.png);
+    height: 7rem;
+    width: 7rem;
+    margin: 0 auto;
+    opacity: 0;
+    background-position: -13rem -769.1rem;
+    background-repeat: no-repeat;
+    transition: 0.15s all linear;
+
+    &:hover {
+        opacity: 1;
     }
 }

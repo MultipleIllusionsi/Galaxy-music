@@ -8,33 +8,52 @@ import Spinner from "../../components/spinner/Spinner";
 
 import "./Homepage.scss";
 
+const cors = `https://cors-anywhere.herokuapp.com/`;
+const api = `http://api.deezer.com/`;
+
 class Homepage extends Component {
   state = {
-    topArtists: [],
+    topArtists: null,
+    topPlaylists: null,
     loading: false,
   };
 
-  componentDidMount() {
-    this.setState({ loading: true });
-    axios
-      .get(
-        `https://cors-anywhere.herokuapp.com/http://api.deezer.com/chart/0/artists?limit=3`
-      )
-      .then(res => {
-        console.log("res.data.data", res.data.data);
-        this.setState({
-          topArtists: res.data.data,
-          loading: false,
-        });
-      })
-      .catch(err => console.log(err));
+  async componentDidMount() {
+    try {
+      this.setState({ loading: true });
+      const res = await axios.get(
+        `${cors}${api}chart/0/artists?limit=3`
+      );
+      console.log("res_artist", res.data.data);
+      this.setState({
+        topArtists: res.data.data,
+        loading: false,
+      });
+    } catch (err) {
+      this.setState({ loading: false });
+      throw new Error(`error ${err}`);
+    }
+
+    try {
+      this.setState({ loading: true });
+      const res = await axios.get(
+        `${cors}${api}chart/0/playlists?limit=8`
+      );
+      console.log("res_playlist", res.data.data);
+      this.setState({
+        topPlaylists: res.data.data,
+        loading: false,
+      });
+    } catch (err) {
+      this.setState({ loading: false });
+      throw new Error(`error ${err}`);
+    }
   }
 
   render() {
-    const { topArtists, loading } = this.state;
+    const { topArtists, topPlaylists, loading } = this.state;
 
-    const bcImg =
-      topArtists.length > 0 && `url(${topArtists[2].picture_xl})`;
+    const bcImg = topArtists && `url(${topArtists[2].picture_xl})`;
 
     return (
       <main className="homepage">
@@ -51,33 +70,53 @@ class Homepage extends Component {
           </div>
         </section>
 
-        {loading ? (
-          <Spinner />
-        ) : (
-          <section
-            className="homepage__section2"
-            style={{
-              backgroundImage: bcImg,
-            }}
-          >
-            <div className="homepage__section2-content">
-              <h3 className="text--big-space pt-md">
-                Featured Artist
-              </h3>
-              <span className="abs-center">
-                <PlayButton to={`/genre`} />
-                <h2 className="artist-name">
-                  {topArtists.length > 0 && topArtists[2].name}
-                </h2>
-                <div className="mt-md">
-                  <CtaButton>
-                    <Link to="/charts">More from this artist</Link>
-                  </CtaButton>
-                </div>
-              </span>
-            </div>
-          </section>
-        )}
+        <section
+          className="homepage__section2"
+          style={
+            ({ backgroundColor: loading ? "black" : "none" },
+            { backgroundImage: loading ? "none" : bcImg })
+          }
+        >
+          <div className="homepage__section2-content">
+            <h3 className="text--big-space pt-md">Featured Artist</h3>
+            <span className="abs-center">
+              <PlayButton to={`/genre`} />
+              <h2 className="artist-name">
+                {topArtists && topArtists[2].name}
+              </h2>
+              <div className="mt-md">
+                <CtaButton>
+                  <Link to="/charts">More from this artist</Link>
+                </CtaButton>
+              </div>
+            </span>
+          </div>
+        </section>
+
+        <section className="homepage__section3">
+          <h3 className="text--big-space pt-md">Playlists</h3>
+          {!topPlaylists ? (
+            <Spinner />
+          ) : (
+            <ul className="playlist mt-md">
+              {topPlaylists.map(playlist => (
+                <li
+                  className="playlist-item"
+                  key={playlist.id}
+                  style={{
+                    backgroundImage: `url(${playlist.picture_medium}`,
+                  }}
+                >
+                  <div className="gradient-overlay">
+                    <span className="abs-center">
+                      <PlayButton to={`/genre`} type="hover" />
+                    </span>
+                  </div>
+                </li>
+              ))}
+            </ul>
+          )}
+        </section>
       </main>
     );
   }
