@@ -15,6 +15,7 @@ class Homepage extends Component {
   state = {
     topArtists: null,
     topPlaylists: null,
+    latestTrack: null,
     loading: false,
   };
 
@@ -48,10 +49,30 @@ class Homepage extends Component {
       this.setState({ loading: false });
       throw new Error(`error ${err}`);
     }
+
+    try {
+      this.setState({ loading: true });
+      const res = await axios.get(
+        `${cors}${api}chart/0/tracks?limit=6`
+      );
+      console.log("res_latestTracks", res.data.data);
+      this.setState({
+        latestTrack: res.data.data,
+        loading: false,
+      });
+    } catch (err) {
+      this.setState({ loading: false });
+      throw new Error(`error ${err}`);
+    }
   }
 
   render() {
-    const { topArtists, topPlaylists, loading } = this.state;
+    const {
+      topArtists,
+      topPlaylists,
+      latestTrack,
+      loading,
+    } = this.state;
 
     const bcImg = topArtists && `url(${topArtists[2].picture_xl})`;
 
@@ -101,7 +122,7 @@ class Homepage extends Component {
             <ul className="playlist mt-md">
               {topPlaylists.map(playlist => (
                 <li
-                  className="playlist-item"
+                  className="playlist__item"
                   key={playlist.id}
                   style={{
                     backgroundImage: `url(${playlist.picture_medium}`,
@@ -116,6 +137,29 @@ class Homepage extends Component {
               ))}
             </ul>
           )}
+        </section>
+
+        <section className="homepage__section4">
+          <h3 className="text--big-space pt-md">Latest</h3>
+          <div className="homepage__section4-content">
+            {!latestTrack ? (
+              <Spinner />
+            ) : (
+              <ul className="latest-list mt-md">
+                {latestTrack.map(track => (
+                  <Link key={track.id} to={`/genre`}>
+                    <li className="latest-list__item">
+                      <span>{track.title}</span>
+                      <span className="latest-artist">
+                        <span className="purple-text">by</span>{" "}
+                        {track.artist.name}
+                      </span>
+                    </li>
+                  </Link>
+                ))}
+              </ul>
+            )}
+          </div>
         </section>
       </main>
     );
