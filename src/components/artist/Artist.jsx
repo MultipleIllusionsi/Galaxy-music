@@ -143,7 +143,7 @@ class Artist extends Component {
                           className="card-img-top"
                           alt="cover"
                         />
-                        <div class="card-body">
+                        <div className="card-body">
                           <div className="card-title">
                             <div>
                               {artist_info.name} - {elem.title}

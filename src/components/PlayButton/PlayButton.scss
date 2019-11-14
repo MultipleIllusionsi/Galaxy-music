@@ -1,0 +1,12 @@
+.play-button {
+    background-image: url(../../assets/icons.png);
+    height: 7rem;
+    width: 7rem;
+    margin: 0 auto;
+    background-position: -13rem -858rem;
+    background-repeat: no-repeat;
+
+    &:hover {
+        background-position: -13rem -769.1rem;
+    }
+}
