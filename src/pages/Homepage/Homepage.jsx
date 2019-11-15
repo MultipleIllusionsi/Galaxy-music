@@ -2,6 +2,8 @@ import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
 
+import Footer from "../../components/footer/Footer";
+
 import CtaButton from "../../components/CtaButton/CtaButton";
 import PlayButton from "../../components/PlayButton/PlayButton";
 import Spinner from "../../components/spinner/Spinner";
@@ -17,6 +19,7 @@ class Homepage extends Component {
     topPlaylists: null,
     latestTrack: null,
     loading: false,
+    error: null,
   };
 
   async componentDidMount() {
@@ -31,8 +34,8 @@ class Homepage extends Component {
         loading: false,
       });
     } catch (err) {
-      this.setState({ loading: false });
-      throw new Error(`error ${err}`);
+      this.setState({ loading: false, error: true });
+      console.log("error artist fetch:", err);
     }
 
     try {
@@ -46,8 +49,8 @@ class Homepage extends Component {
         loading: false,
       });
     } catch (err) {
-      this.setState({ loading: false });
-      throw new Error(`error ${err}`);
+      this.setState({ loading: false, error: true });
+      console.log("error playlist fetch:", err);
     }
 
     try {
@@ -61,8 +64,8 @@ class Homepage extends Component {
         loading: false,
       });
     } catch (err) {
-      this.setState({ loading: false });
-      throw new Error(`error ${err}`);
+      this.setState({ loading: false, error: true });
+      console.log("error tracks fetch:", err);
     }
   }
 
@@ -145,22 +148,29 @@ class Homepage extends Component {
             {!latestTrack ? (
               <Spinner />
             ) : (
-              <ul className="latest-list mt-md">
-                {latestTrack.map(track => (
-                  <Link key={track.id} to={`/genre`}>
-                    <li className="latest-list__item">
-                      <span>{track.title}</span>
-                      <span className="latest-artist">
-                        <span className="purple-text">by</span>{" "}
-                        {track.artist.name}
-                      </span>
-                    </li>
-                  </Link>
-                ))}
-              </ul>
+              <>
+                <ul className="latest-list mt-md">
+                  {latestTrack.map(track => (
+                    <Link key={track.id} to={`/genre`}>
+                      <li className="latest-list__item">
+                        <span>{track.title}</span>
+                        <span className="latest-artist">
+                          <span className="purple-text">by</span>{" "}
+                          {track.artist.name}
+                        </span>
+                      </li>
+                    </Link>
+                  ))}
+                </ul>
+                <CtaButton>
+                  <Link to="/charts">Get more tracks</Link>
+                </CtaButton>
+              </>
             )}
           </div>
         </section>
+
+        <Footer />
       </main>
     );
   }
