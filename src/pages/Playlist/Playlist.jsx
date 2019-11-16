@@ -68,7 +68,7 @@ class Playlist extends Component {
                 {playlist.tracks.data.map(track => (
                   <Track
                     key={`${track.id}`}
-                    cover={playlist.cover_small}
+                    cover={playlist.picture_small}
                     track={track}
                   />
                 ))}
