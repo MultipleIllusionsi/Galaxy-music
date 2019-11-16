@@ -61,7 +61,7 @@ class Album extends Component {
               </div>
             </section>
 
-            <section className="tracks-wrapper">
+            <section>
               <ul className="tracks-list">
                 {album.tracks.data.map(track => (
                   <Track

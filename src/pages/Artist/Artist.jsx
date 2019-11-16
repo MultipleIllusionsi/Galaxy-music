@@ -40,19 +40,20 @@ class Artist extends Component {
   render() {
     const { artistInfo, artistTrack } = this.state;
     return (
-      <main>
+      <main className="artist-page">
         {artistInfo === null ? (
           <Spinner />
         ) : (
-          <section className="secondary-bc">
-            <div className="quick-intro">
+          <>
+            <div className="secondary-bc"></div>
+            <section className="quick-intro">
               <div className="quick-intro__icon">
                 <span></span>
               </div>
               <h2 className="heading-primary">{artistInfo.name}</h2>
               <p className="quick-intro__genre"></p>
-            </div>
-            <div className="full-intro">
+            </section>
+            <section className="full-intro">
               <div className="full-intro__img">
                 <img src={artistInfo.picture_big} alt="img" />
               </div>
@@ -67,7 +68,7 @@ class Artist extends Component {
                   omnis aut molestias nemo.
                 </p>
               </div>
-            </div>
+            </section>
 
             {artistTrack === null ? (
               <Spinner />
@@ -82,7 +83,7 @@ class Artist extends Component {
                 ))}
               </ul>
             )}
-          </section>
+          </>
         )}
       </main>
     );

@@ -2,8 +2,6 @@ import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
 
-import Footer from "../../components/footer/Footer";
-
 import CtaButton from "../../components/CtaButton/CtaButton";
 import PlayButton from "../../components/PlayButton/PlayButton";
 import Spinner from "../../components/spinner/Spinner";
@@ -69,6 +67,14 @@ class Homepage extends Component {
     }
   }
 
+  sliceStr = (str, num) => {
+    if (str.length > num) {
+      return `${str.slice(0, num)}...`;
+    } else {
+      return str;
+    }
+  };
+
   render() {
     const {
       topArtists,
@@ -89,7 +95,7 @@ class Homepage extends Component {
               artists, bands and record labels
             </p>
             <CtaButton>
-              <Link to="/charts">Browse Music</Link>
+              <Link to="/browse">Browse Music</Link>
             </CtaButton>
           </div>
         </section>
@@ -162,9 +168,9 @@ class Homepage extends Component {
                   {newAlbums.map(album => (
                     <Link key={album.id} to={`/album/${album.id}`}>
                       <li className="latest-list__item">
-                        <span>{album.title}</span>
+                        <span>{this.sliceStr(album.title, 35)}</span>
                         <span className="latest-artist">
-                          <span className="purple-text">by</span>
+                          <span className="purple-text">by </span>
                           {album.artist.name}
                         </span>
                       </li>
@@ -178,8 +184,6 @@ class Homepage extends Component {
             )}
           </div>
         </section>
-
-        <Footer />
       </main>
     );
   }

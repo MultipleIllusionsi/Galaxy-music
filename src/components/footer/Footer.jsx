@@ -15,10 +15,10 @@ const Footer = () => (
         <Link to="/">Browse</Link>
       </li>
       <li className="footer__list-item">
-        <Link to="/">Contact</Link>
+        <Link to="/">Charts</Link>
       </li>
       <li className="footer__list-item">
-        <Link to="/">Smth else</Link>
+        <Link to="/">Contact</Link>
       </li>
     </ul>
     <p className="footer__copyright">Copyright 2019 Marmoset LLC</p>

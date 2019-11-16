@@ -7,7 +7,9 @@ import "./Navbar.scss";
 
 const Navbar = ({ location: { pathname } }) => {
   let style =
-    pathname.includes("album") || pathname.includes("playlist")
+    pathname.includes("album") ||
+    pathname.includes("playlist") ||
+    pathname.includes("charts")
       ? { color: "black" }
       : { color: "whitesmoke" };
 
@@ -19,13 +21,13 @@ const Navbar = ({ location: { pathname } }) => {
             <NavLink to="/">Galaxy</NavLink>
           </li>
           <li className="navbar__list-item">
+            <NavLink to="/browse">Browse</NavLink>
+          </li>
+          <li className="navbar__list-item">
             <NavLink to="/charts">Charts</NavLink>
           </li>
           <li className="navbar__list-item">
-            <NavLink to="/genre">Genres</NavLink>
-          </li>
-          <li className="navbar__list-item">
-            <NavLink to="/search">Search</NavLink>
+            <NavLink to="/contact">Contact</NavLink>
           </li>
         </ul>
       </nav>

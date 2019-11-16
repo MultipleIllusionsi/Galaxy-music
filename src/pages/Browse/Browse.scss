@@ -1,0 +1,86 @@
+@import "../../assets/sass/mixins.scss";
+
+.browse-form {
+  background: #eee;
+
+  &__tabs {
+    display: flex;
+    justify-content: space-between;
+
+    &-item {
+      @include Quando;
+      font-size: 1.4rem;
+      color: #3a3532;
+      letter-spacing: 0.13rem;
+      text-transform: uppercase;
+      font-weight: 700;
+      width: 100%;
+      text-align: center;
+      background: #fff;
+
+
+
+      & label {
+        display: block;
+        width: 100%;
+        padding: 3rem;
+        cursor: pointer;
+      }
+    }
+
+    &-input {
+      &:checked~label {
+        background: #37b480;
+        color: #fff;
+      }
+    }
+  }
+
+  &__search {
+    &-wrapper {
+      padding: 4rem 6rem;
+    }
+
+    max-width: 120rem;
+    margin: 0 auto;
+    padding: 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    & input {
+      border: none;
+      font-size: 4rem;
+      margin-left: 1rem;
+      margin-right: auto;
+
+      &:focus {
+        outline: none;
+      }
+
+      &::placeholder {
+        color: #ebeaea;
+      }
+    }
+
+    & select {}
+
+    background: #fff;
+  }
+}
+
+.search-button {
+  background: transparent;
+  background-image: url(../../assets/icons.png);
+  background-position: -151px -4677px;
+  background-repeat: no-repeat;
+  display: block;
+  height: 3rem;
+  width: 3rem;
+  cursor: pointer;
+  border: none;
+
+  &:hover {
+    opacity: 0.7;
+  }
+}
