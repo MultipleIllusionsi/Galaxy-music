@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import axios from "axios";
 import Spinner from "../spinner/Spinner";
-import SmallTrack from "../track/SmallTrack";
+import Track from "../track/Track";
 import { Link } from "react-router-dom";
 
 import "./Charts.scss";
@@ -111,7 +111,7 @@ class Charts extends Component {
                 </div>
                 <ul class="list-group list-group-flush">
                   {this.state.topTracks.map(elem => (
-                    <SmallTrack track={elem} />
+                    <Track track={elem} />
                   ))}
                 </ul>
               </div>

@@ -47,3 +47,23 @@ a {
   left: 50%;
   transform: translate(-50%, -50%);
 }
+
+.secondary-bc {
+  background-image: url(./assets/street-bc.jpg);
+  background-position: center center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  height: 25rem;
+  padding-top: 25rem;
+  color: black;
+}
+
+
+
+.purple-text {
+  color: #8a4fab;
+}
+
+img {
+  width: 100%;
+}

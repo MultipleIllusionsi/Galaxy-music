@@ -7,18 +7,14 @@ import Spinner from "./components/spinner/Spinner";
 import "./App.scss";
 
 const Search = lazy(() => import("./components/search/Search"));
-const SeparTrack = lazy(() =>
-  import("./components/track/SeparTrack")
-);
+const Track = lazy(() => import("./components/track/Track"));
 const Charts = lazy(() => import("./components/charts/Charts"));
 const Genre = lazy(() => import("./components/genre/Genre"));
 const GenreType = lazy(() => import("./components/genre/GenreType"));
-const SeparAlbum = lazy(() =>
-  import("./components/album/SeparAlbum")
-);
+const Album = lazy(() => import("./pages/Album/Album"));
 const Homepage = lazy(() => import("./pages/Homepage/Homepage"));
-const Playlist = lazy(() => import("./components/playlist/Playlist"));
-const Artist = lazy(() => import("./components/artist/Artist"));
+const Playlist = lazy(() => import("./pages/Playlist/Playlist"));
+const Artist = lazy(() => import("./pages/Artist/Artist"));
 
 const App = () => (
   <>
@@ -37,8 +33,8 @@ const App = () => (
           path="/genre/:id/artist/:artist_id"
           component={Artist}
         />
-        <Route exact path="/track/:id" component={SeparTrack} />
-        <Route exact path="/album/:id" component={SeparAlbum} />
+        <Route exact path="/track/:id" component={Track} />
+        <Route exact path="/album/:id" component={Album} />
         <Route exact path="/playlist/:id" component={Playlist} />
         <Route exact path="/artist/:artist_id" component={Artist} />
       </Suspense>

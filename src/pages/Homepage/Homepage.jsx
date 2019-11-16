@@ -17,7 +17,7 @@ class Homepage extends Component {
   state = {
     topArtists: null,
     topPlaylists: null,
-    latestTrack: null,
+    newAlbums: null,
     loading: false,
     error: null,
   };
@@ -26,7 +26,7 @@ class Homepage extends Component {
     try {
       this.setState({ loading: true });
       const res = await axios.get(
-        `${cors}${api}chart/0/artists?limit=3`
+        `${cors}${api}chart/0/artists?index=2&limit=1`
       );
       console.log("res_artist", res.data.data);
       this.setState({
@@ -56,11 +56,11 @@ class Homepage extends Component {
     try {
       this.setState({ loading: true });
       const res = await axios.get(
-        `${cors}${api}chart/0/tracks?limit=6`
+        `${cors}${api}editorial/0/releases?limit=6`
       );
-      console.log("res_latestTracks", res.data.data);
+      console.log("res_newAlbums", res.data.data);
       this.setState({
-        latestTrack: res.data.data,
+        newAlbums: res.data.data,
         loading: false,
       });
     } catch (err) {
@@ -73,11 +73,11 @@ class Homepage extends Component {
     const {
       topArtists,
       topPlaylists,
-      latestTrack,
+      newAlbums,
       loading,
     } = this.state;
 
-    const bcImg = topArtists && `url(${topArtists[2].picture_xl})`;
+    const bcImg = topArtists && `url(${topArtists[0].picture_xl})`;
 
     return (
       <main className="homepage">
@@ -104,13 +104,19 @@ class Homepage extends Component {
           <div className="homepage__section2-content">
             <h3 className="text--big-space pt-md">Featured Artist</h3>
             <span className="abs-center">
-              <PlayButton to={`/genre`} />
+              <PlayButton
+                to={topArtists && `/artist/${topArtists[0].id}`}
+              />
               <h2 className="artist-name">
-                {topArtists && topArtists[2].name}
+                {topArtists && topArtists[0].name}
               </h2>
               <div className="mt-md">
                 <CtaButton>
-                  <Link to="/charts">More from this artist</Link>
+                  <Link
+                    to={topArtists && `/artist/${topArtists[0].id}`}
+                  >
+                    More from this artist
+                  </Link>
                 </CtaButton>
               </div>
             </span>
@@ -133,7 +139,10 @@ class Homepage extends Component {
                 >
                   <div className="gradient-overlay">
                     <span className="abs-center">
-                      <PlayButton to={`/genre`} type="hover" />
+                      <PlayButton
+                        to={`/playlist/${playlist.id}`}
+                        type="hover"
+                      />
                     </span>
                   </div>
                 </li>
@@ -143,27 +152,27 @@ class Homepage extends Component {
         </section>
 
         <section className="homepage__section4">
-          <h3 className="text--big-space pt-md">Latest</h3>
+          <h3 className="text--big-space pt-md">New Albums</h3>
           <div className="homepage__section4-content">
-            {!latestTrack ? (
+            {!newAlbums ? (
               <Spinner />
             ) : (
               <>
                 <ul className="latest-list mt-md">
-                  {latestTrack.map(track => (
-                    <Link key={track.id} to={`/genre`}>
+                  {newAlbums.map(album => (
+                    <Link key={album.id} to={`/album/${album.id}`}>
                       <li className="latest-list__item">
-                        <span>{track.title}</span>
+                        <span>{album.title}</span>
                         <span className="latest-artist">
-                          <span className="purple-text">by</span>{" "}
-                          {track.artist.name}
+                          <span className="purple-text">by</span>
+                          {album.artist.name}
                         </span>
                       </li>
                     </Link>
                   ))}
                 </ul>
                 <CtaButton>
-                  <Link to="/charts">Get more tracks</Link>
+                  <Link to="/charts">Get more albums</Link>
                 </CtaButton>
               </>
             )}
