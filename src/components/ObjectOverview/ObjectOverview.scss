@@ -1,4 +1,4 @@
-.album {
+.Overview {
     &-page {
         padding-top: 10rem;
     }
@@ -51,4 +51,13 @@
     height: 100%;
     z-index: -10;
     filter: blur(2rem);
+}
+
+.tracks-list {
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    max-width: 120rem;
+    width: 100%;
+    margin: 3rem auto;
 }

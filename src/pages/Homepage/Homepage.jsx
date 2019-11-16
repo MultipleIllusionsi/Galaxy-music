@@ -4,7 +4,8 @@ import axios from "axios";
 
 import CtaButton from "../../components/CtaButton/CtaButton";
 import PlayButton from "../../components/PlayButton/PlayButton";
-import Spinner from "../../components/spinner/Spinner";
+import GroupList from "../../components/GroupList/GroupList";
+import LineList from "../../components/LineList/LineList";
 
 import "./Homepage.scss";
 
@@ -67,14 +68,6 @@ class Homepage extends Component {
     }
   }
 
-  sliceStr = (str, num) => {
-    if (str.length > num) {
-      return `${str.slice(0, num)}...`;
-    } else {
-      return str;
-    }
-  };
-
   render() {
     const {
       topArtists,
@@ -87,8 +80,8 @@ class Homepage extends Component {
 
     return (
       <main className="homepage">
-        <section className="homepage__section1">
-          <div className="homepage__section1-content">
+        <section className="homepage__section-hero">
+          <div className="homepage__section-hero__content">
             <h1>Meticulously curated music for licensing</h1>
             <p>
               Browse our roster of rare and emerging independent
@@ -101,13 +94,13 @@ class Homepage extends Component {
         </section>
 
         <section
-          className="homepage__section2"
+          className="homepage__section-artists"
           style={
             ({ backgroundColor: loading ? "black" : "none" },
             { backgroundImage: loading ? "none" : bcImg })
           }
         >
-          <div className="homepage__section2-content">
+          <div className="homepage__section-artists">
             <h3 className="text--big-space pt-md">Featured Artist</h3>
             <span className="abs-center">
               <PlayButton
@@ -129,60 +122,14 @@ class Homepage extends Component {
           </div>
         </section>
 
-        <section className="homepage__section3">
+        <section className="homepage__section-playlists">
           <h3 className="text--big-space pt-md">Playlists</h3>
-          {!topPlaylists ? (
-            <Spinner />
-          ) : (
-            <ul className="playlist mt-md">
-              {topPlaylists.map(playlist => (
-                <li
-                  className="playlist__item"
-                  key={playlist.id}
-                  style={{
-                    backgroundImage: `url(${playlist.picture_medium}`,
-                  }}
-                >
-                  <div className="gradient-overlay">
-                    <span className="abs-center">
-                      <PlayButton
-                        to={`/playlist/${playlist.id}`}
-                        type="hover"
-                      />
-                    </span>
-                  </div>
-                </li>
-              ))}
-            </ul>
-          )}
+          <GroupList to="playlist" data={topPlaylists} />
         </section>
 
-        <section className="homepage__section4">
+        <section className="homepage__section-albums">
           <h3 className="text--big-space pt-md">New Albums</h3>
-          <div className="homepage__section4-content">
-            {!newAlbums ? (
-              <Spinner />
-            ) : (
-              <>
-                <ul className="latest-list mt-md">
-                  {newAlbums.map(album => (
-                    <Link key={album.id} to={`/album/${album.id}`}>
-                      <li className="latest-list__item">
-                        <span>{this.sliceStr(album.title, 35)}</span>
-                        <span className="latest-artist">
-                          <span className="purple-text">by </span>
-                          {album.artist.name}
-                        </span>
-                      </li>
-                    </Link>
-                  ))}
-                </ul>
-                <CtaButton>
-                  <Link to="/charts">Get more albums</Link>
-                </CtaButton>
-              </>
-            )}
-          </div>
+          <LineList data={newAlbums} />
         </section>
       </main>
     );

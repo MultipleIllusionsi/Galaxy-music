@@ -1,14 +1,5 @@
 @import "../../assets/sass/mixins.scss";
 
-.groupAlbum-page {
-    padding-top: 10rem;
-
-    & h3 {
-        background: #efefed;
-        color: #3a3532;
-        padding: 5rem 3rem;
-    }
-}
 
 .grouplist {
     padding: 1rem;
@@ -38,7 +29,6 @@
         & .artist-name {
             margin-top: 0.5rem;
             font-size: 1.4rem;
-            text-align: left;
         }
     }
 

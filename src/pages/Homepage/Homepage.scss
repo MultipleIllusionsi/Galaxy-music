@@ -3,7 +3,7 @@
 .homepage {
   background-color: #e3e3e3;
 
-  &__section1 {
+  &__section-hero {
     background-image: url(../../assets/homepage-hero.jpg);
     background-position: center center;
     background-size: cover;
@@ -11,7 +11,7 @@
     height: 100vh;
     width: 100%;
 
-    &-content {
+    &__content {
       position: absolute;
       top: 35%;
       left: 50%;
@@ -32,7 +32,7 @@
     }
   }
 
-  &__section2 {
+  &__section-artists {
     background-position: center center;
     background-size: contain;
     background-repeat: no-repeat;
@@ -51,7 +51,7 @@
     }
   }
 
-  &__section3 {
+  &__section-playlists {
     height: 100vh;
     width: 100%;
     max-width: 120rem;
@@ -62,7 +62,7 @@
     }
   }
 
-  &__section4 {
+  &__section-albums {
     background-image: url(../../assets/latest.jpg);
     background-position: center center;
     background-size: cover;
@@ -113,37 +113,5 @@
       height: 100%;
       background: linear-gradient(to bottom, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.8))
     }
-  }
-}
-
-.latest-list {
-  margin-top: 10rem;
-
-  &__item {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    font-size: 4.8rem;
-    padding: 0 2rem;
-    margin: 0 3rem;
-    position: relative;
-    border-bottom: 1px solid rgba(89, 16, 149, 0.5);
-    transition: 0.2s all ease-out;
-
-    &:hover {
-      background: rgba(89, 16, 149, 0.1);
-    }
-  }
-}
-
-
-
-.latest-title {}
-
-.latest-artist {
-  font-size: 3rem;
-
-  & span {
-    color: #8a4fab;
   }
 }

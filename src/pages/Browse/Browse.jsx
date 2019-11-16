@@ -17,7 +17,7 @@ class Browse extends Component {
     loading: false,
   };
 
-  onChange = ({ target: { value } }) => {
+  onChangeSearchInput = ({ target: { value } }) => {
     this.setState({ queryTitle: value });
   };
 
@@ -28,17 +28,18 @@ class Browse extends Component {
 
   findTrack = e => {
     const { queryTitle, queryType } = this.state;
-
     e.preventDefault();
     this.setState({ loading: true });
+
     axios
       .get(`${cors}${api}search?q=${queryType}:"${queryTitle}"`)
       .then(res => {
         console.log("res", res.data.data);
         this.setState({
           result: res.data.data,
+          queryTitle: "",
+          loading: false,
         });
-        this.setState({ queryTitle: "", loading: false });
       })
       .catch(err => console.log(err));
   };
@@ -47,7 +48,7 @@ class Browse extends Component {
     const {
       currentTab,
       queryTitle,
-      queryType,
+      // queryType,
       result,
       loading,
     } = this.state;
@@ -58,10 +59,7 @@ class Browse extends Component {
         <div className="browse-form">
           <form onSubmit={this.findTrack}>
             <ul className="browse-form__tabs">
-              <li
-                className={`browse-form__tabs-item ${currentTab ===
-                  "filter" && "checked"}`}
-              >
+              <li className={`browse-form__tabs-item`}>
                 <input
                   id="filter"
                   className="browse-form__tabs-input display-none"
@@ -69,15 +67,12 @@ class Browse extends Component {
                   name="query"
                   value="filter"
                   onChange={this.handleTabs}
-                  checked={currentTab === "filter" ? true : false}
+                  checked={currentTab === "filter" && true}
                 />
                 <label htmlFor="filter">Filter</label>
               </li>
 
-              <li
-                className={`browse-form__tabs-item ${currentTab ===
-                  "search" && "checked"}`}
-              >
+              <li className={`browse-form__tabs-item`}>
                 <input
                   className="browse-form__tabs-input display-none"
                   type="radio"
@@ -85,7 +80,7 @@ class Browse extends Component {
                   name="query"
                   value="search"
                   onChange={this.handleTabs}
-                  checked={currentTab === "search" ? true : false}
+                  checked={currentTab === "search" && true}
                 />
                 <label htmlFor="search">Search</label>
               </li>
@@ -102,7 +97,7 @@ class Browse extends Component {
                     placeholder="Title..."
                     name="queryTitle"
                     value={queryTitle}
-                    onChange={this.onChange}
+                    onChange={this.onChangeSearchInput}
                   />
                   <select
                     defaultValue="all"
@@ -124,18 +119,15 @@ class Browse extends Component {
 
         {loading && <Spinner />}
         {result && (
-          <div>
-            <ul className="tracks-list">
-              {result &&
-                result.map(track => (
-                  <Track
-                    key={track.id}
-                    cover={track.album.cover_small}
-                    track={track}
-                  />
-                ))}
-            </ul>
-          </div>
+          <ul className="tracks-list">
+            {result.map(track => (
+              <Track
+                key={track.id}
+                cover={track.album.cover_small}
+                track={track}
+              />
+            ))}
+          </ul>
         )}
       </main>
     );
