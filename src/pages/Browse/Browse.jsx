@@ -13,9 +13,12 @@ const api = `http://api.deezer.com/`;
 class Browse extends Component {
   state = {
     currentTab: "search",
+    genreType: "charts",
     queryTitle: "",
     queryType: "",
-    result: null,
+    genres: null,
+    filterResult: null,
+    searchResult: null,
     loading: false,
   };
 
@@ -23,26 +26,60 @@ class Browse extends Component {
     this.setState({ queryTitle: value });
   };
 
-  handleTabs = ({ target: { value } }) => {
-    console.log("target", value);
-    this.setState({ currentTab: value });
+  handleTabs = async ({ target: { value } }) => {
+    this.setState({ currentTab: value }, () => {
+      const { genres, currentTab } = this.state;
+      if (genres === null && currentTab === "filter") {
+        this.fetchGenres();
+      }
+    });
+  };
+
+  fetchGenres = () => {
+    this.setState({ loading: true });
+    axios
+      .get(`${cors}${api}genre`)
+      .then(res => {
+        console.log("res.data", res.data.data);
+        this.setState({
+          genres: res.data.data,
+          loading: false,
+        });
+      })
+      .catch(err => console.log(err));
   };
 
   currentOption = value => {
-    this.setState({ queryType: value });
+    this.setState({ queryType: value.toLowerCase() });
+  };
+
+  onChangeGenre = e => {
+    const { genreType } = this.state;
+    e.preventDefault();
+    this.setState({ loading: true });
+    axios
+      .get(`${cors}${api}editorial/${e.target.id}/${genreType}`)
+      .then(res => {
+        console.log("res genre current", res.data);
+        this.setState({
+          genreResult: res.data,
+          loading: false,
+        });
+      })
+      .catch(err => console.log(err));
   };
 
   findTrack = e => {
     const { queryTitle, queryType } = this.state;
     e.preventDefault();
     this.setState({ loading: true });
-
     axios
-      .get(`${cors}${api}search?q=${queryType}:"${queryTitle}"`)
+      .get(
+        `${cors}${api}search?q=${queryType}:"${queryTitle}"&limit=25`
+      )
       .then(res => {
-        console.log("res", res.data.data);
         this.setState({
-          result: res.data.data,
+          searchResult: res.data.data,
           queryTitle: "",
           loading: false,
         });
@@ -54,8 +91,9 @@ class Browse extends Component {
     const {
       currentTab,
       queryTitle,
-      // queryType,
-      result,
+      genreResult,
+      searchResult,
+      genres,
       loading,
     } = this.state;
 
@@ -92,35 +130,64 @@ class Browse extends Component {
               </li>
             </ul>
             {currentTab === "search" ? (
-              <div className="browse-form__search-wrapper">
+              <div className="browse-form__wrapper">
                 <div className="browse-form__search">
-                  <button
-                    className="search-button"
-                    type="submit"
-                  ></button>
-                  <input
-                    type="text"
-                    placeholder="Title..."
-                    name="queryTitle"
-                    value={queryTitle}
-                    onChange={this.onChangeSearchInput}
-                  />
+                  <div className="browse-form__search-input">
+                    <button
+                      className="search-button"
+                      type="submit"
+                      aria-label="search button"
+                    ></button>
+                    <input
+                      type="text"
+                      placeholder="Title..."
+                      name="queryTitle"
+                      value={queryTitle}
+                      onChange={this.onChangeSearchInput}
+                    />
+                  </div>
 
-                  <CustomSelect
-                    option={this.currentOption.bind(this)}
-                  />
+                  <CustomSelect option={this.currentOption} />
                 </div>
               </div>
             ) : (
-              <div className="browse-form__filter">blyaaa</div>
+              <div className="browse-form__wrapper center-page">
+                <ul
+                  className="genre-list"
+                  onClick={this.onChangeGenre}
+                >
+                  {genres &&
+                    genres.map(genre => (
+                      <li
+                        id={genre.id}
+                        className="genre-list__item"
+                        key={genre.id}
+                      >
+                        {genre.name}
+                      </li>
+                    ))}
+                </ul>
+              </div>
             )}
           </form>
         </div>
 
         {loading && <Spinner />}
-        {result && (
+        {searchResult && (
           <ul className="tracks-list">
-            {result.map(track => (
+            {searchResult.map(track => (
+              <Track
+                key={track.id}
+                cover={track.album.cover_small}
+                track={track}
+              />
+            ))}
+          </ul>
+        )}
+
+        {genreResult && (
+          <ul className="tracks-list">
+            {genreResult.tracks.data.map(track => (
               <Track
                 key={track.id}
                 cover={track.album.cover_small}

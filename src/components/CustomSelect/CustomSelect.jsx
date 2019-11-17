@@ -27,8 +27,9 @@ class CustomSelect extends Component {
     const { expanded, currentOption } = this.state;
     return (
       <ul className="select">
-        <div onClick={this.toggleSelect} className="checked">
-          {currentOption} &#x02228;
+        <div onClick={this.toggleSelect} className="checked-option">
+          <p>{currentOption}</p>
+          <p>&#9662;</p>
         </div>
         <ol
           className={`option-list ${
@@ -39,14 +40,14 @@ class CustomSelect extends Component {
             this.sendOption(e);
           }}
         >
-          <li data-value="Songs" className="option-list__item">
-            Songs
+          <li data-value="Track" className="option-list__item">
+            Track
           </li>
-          <li data-value="Artists" className="option-list__item">
-            Artists
+          <li data-value="Artist" className="option-list__item">
+            Artist
           </li>
-          <li data-value="Lyrics" className="option-list__item">
-            Lyrics
+          <li data-value="Label" className="option-list__item">
+            Label
           </li>
           <li data-value="All" className="option-list__item">
             All
