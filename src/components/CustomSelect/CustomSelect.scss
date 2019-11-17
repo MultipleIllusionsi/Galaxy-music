@@ -1,0 +1,33 @@
+.select {
+    color: black;
+    font-size: 2rem;
+    cursor: pointer;
+    position: relative;
+}
+
+.open {
+    display: block;
+}
+
+.close {
+    display: none;
+}
+
+.option-list {
+    background: white;
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    transition: 0.3s all ease-out;
+
+    &__item {
+        padding: 0.5rem 3rem;
+        border: 1px solid black;
+    }
+}
+
+.checked {
+    padding: 0.5rem 3rem;
+    border: 1px solid black;
+}

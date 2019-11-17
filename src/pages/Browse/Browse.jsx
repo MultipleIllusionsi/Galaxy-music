@@ -1,7 +1,9 @@
 import React, { Component } from "react";
 import axios from "axios";
+
 import Track from "../../components/track/Track";
 import Spinner from "../../components/spinner/Spinner";
+import CustomSelect from "../../components/CustomSelect/CustomSelect";
 
 import "./Browse.scss";
 
@@ -24,6 +26,10 @@ class Browse extends Component {
   handleTabs = ({ target: { value } }) => {
     console.log("target", value);
     this.setState({ currentTab: value });
+  };
+
+  currentOption = value => {
+    this.setState({ queryType: value });
   };
 
   findTrack = e => {
@@ -99,16 +105,10 @@ class Browse extends Component {
                     value={queryTitle}
                     onChange={this.onChangeSearchInput}
                   />
-                  <select
-                    defaultValue="all"
-                    name="select"
-                    id="select"
-                  >
-                    <option value="songs">songs</option>
-                    <option value="artists">artists</option>
-                    <option value="lyrics">lyrics</option>
-                    <option value="all">all</option>
-                  </select>
+
+                  <CustomSelect
+                    option={this.currentOption.bind(this)}
+                  />
                 </div>
               </div>
             ) : (
