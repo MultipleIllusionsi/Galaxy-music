@@ -1,4 +1,4 @@
-import React from "react";
+import React, { memo } from "react";
 
 import Spinner from "../../components/spinner/Spinner";
 
@@ -56,4 +56,4 @@ const GroupList = ({ data, provideInfo, to }) => {
   );
 };
 
-export default GroupList;
+export default memo(GroupList);

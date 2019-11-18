@@ -1,4 +1,4 @@
-import React from "react";
+import React, { memo } from "react";
 
 import { Link } from "react-router-dom";
 
@@ -16,7 +16,6 @@ const sliceStr = (str, num) => {
 };
 
 const LineList = ({ data }) => {
-  console.log("data for LineList", data);
   return (
     <div className="center-page">
       {!data ? (
@@ -45,4 +44,4 @@ const LineList = ({ data }) => {
   );
 };
 
-export default LineList;
+export default memo(LineList);

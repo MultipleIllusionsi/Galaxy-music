@@ -3,9 +3,10 @@ import { Link } from "react-router-dom";
 import axios from "axios";
 
 import CtaButton from "../../components/CtaButton/CtaButton";
-import PlayButton from "../../components/PlayButton/PlayButton";
 import GroupList from "../../components/GroupList/GroupList";
 import LineList from "../../components/LineList/LineList";
+
+import Slider from "../../components/Slider/Slider";
 
 import "./Homepage.scss";
 
@@ -25,7 +26,7 @@ class Homepage extends Component {
     try {
       this.setState({ loading: true });
       const res = await axios.get(
-        `${cors}${api}chart/0/artists?index=2&limit=1`
+        `${cors}${api}chart/0/artists&limit=3`
       );
       console.log("res_artist", res.data.data);
       this.setState({
@@ -42,7 +43,7 @@ class Homepage extends Component {
       const res = await axios.get(
         `${cors}${api}chart/0/playlists?limit=8`
       );
-      console.log("res_playlist", res.data.data);
+      // console.log("res_playlist", res.data.data);
       this.setState({
         topPlaylists: res.data.data,
         loading: false,
@@ -57,7 +58,7 @@ class Homepage extends Component {
       const res = await axios.get(
         `${cors}${api}editorial/0/releases?limit=6`
       );
-      console.log("res_newAlbums", res.data.data);
+      // console.log("res_newAlbums", res.data.data);
       this.setState({
         newAlbums: res.data.data,
         loading: false,
@@ -69,14 +70,7 @@ class Homepage extends Component {
   }
 
   render() {
-    const {
-      topArtists,
-      topPlaylists,
-      newAlbums,
-      loading,
-    } = this.state;
-
-    const bcImg = topArtists && `url(${topArtists[0].picture_xl})`;
+    const { topArtists, topPlaylists, newAlbums } = this.state;
 
     return (
       <main className="homepage">
@@ -93,33 +87,9 @@ class Homepage extends Component {
           </div>
         </section>
 
-        <section
-          className="homepage__section-artists"
-          style={
-            ({ backgroundColor: loading ? "black" : "none" },
-            { backgroundImage: loading ? "none" : bcImg })
-          }
-        >
-          <div className="homepage__section-artists">
-            <h3 className="text--big-space pt-md">Featured Artist</h3>
-            <span className="abs-center">
-              <PlayButton
-                to={topArtists && `/artist/${topArtists[0].id}`}
-              />
-              <h2 className="artist-name">
-                {topArtists && topArtists[0].name}
-              </h2>
-              <div className="mt-md">
-                <CtaButton>
-                  <Link
-                    to={topArtists && `/artist/${topArtists[0].id}`}
-                  >
-                    More from this artist
-                  </Link>
-                </CtaButton>
-              </div>
-            </span>
-          </div>
+        <section className="homepage__section-artists">
+          <h3 className="text--big-space pt-md">Featured Artist</h3>
+          <Slider total={3} data={topArtists} />
         </section>
 
         <section className="homepage__section-playlists">

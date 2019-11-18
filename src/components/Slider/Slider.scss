@@ -1,0 +1,70 @@
+.slider-wrapper {
+    height: 100vh;
+    position: relative;
+    overflow: hidden;
+}
+
+.slider-control {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    padding: 0 10rem;
+    width: 100%;
+    z-index: 500;
+    display: flex;
+    justify-content: space-between;
+}
+
+.slider-button {
+    &__left {
+        background: transparent;
+        background-image: url(../../assets/icons.png);
+        background-position: -149px -630px;
+        background-repeat: no-repeat;
+        display: block;
+        height: 59px;
+        width: 31px;
+        border: none;
+        cursor: pointer;
+        transition: 0.3s all ease-out;
+
+        &:hover {
+            transform: translateX(-0.5rem);
+        }
+    }
+
+    &__right {
+        background: transparent;
+        background-image: url(../../assets/icons.png);
+        z-index: 1500;
+        background-position: -149px -630px;
+        background-repeat: no-repeat;
+        display: block;
+        height: 59px;
+        width: 31px;
+        transform: scale(-1, 1);
+        border: none;
+        cursor: pointer;
+        transition: 0.3s all ease-out;
+
+        &:hover {
+            transform: translateX(0.5rem) scale(-1, 1);
+        }
+    }
+}
+
+.visible {
+    top: 0;
+    left: 0;
+}
+
+.invisible-left {
+    top: 0;
+    transform: translateX(-100%);
+}
+
+.invisible-right {
+    top: 0;
+    // right: 100%;
+    transform: translateX(100%);
+}
