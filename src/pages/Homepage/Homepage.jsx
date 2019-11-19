@@ -9,6 +9,7 @@ import LineList from "../../components/LineList/LineList";
 import Slider from "../../components/Slider/Slider";
 
 import "./Homepage.scss";
+import Spinner from "../../components/spinner/Spinner";
 
 const cors = `https://cors-anywhere.herokuapp.com/`;
 const api = `http://api.deezer.com/`;
