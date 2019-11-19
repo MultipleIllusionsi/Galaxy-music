@@ -24,67 +24,61 @@ class Browse extends Component {
 
   onChangeSearchInput = ({ target: { value } }) => {
     this.setState({ queryTitle: value });
-  };
+  }; // add debounce
 
-  handleTabs = async ({ target: { value } }) => {
+  handleTabs = ({ target: { value } }) => {
     this.setState({ currentTab: value }, () => {
       const { genres, currentTab } = this.state;
-      if (genres === null && currentTab === "filter") {
+      if (currentTab === "filter" && genres === null) {
         this.fetchGenres();
       }
     });
   };
 
-  fetchGenres = () => {
-    this.setState({ loading: true });
-    axios
-      .get(`${cors}${api}genre`)
-      .then(res => {
-        console.log("res.data", res.data.data);
-        this.setState({
-          genres: res.data.data,
-          loading: false,
-        });
-      })
-      .catch(err => console.log(err));
-  };
-
-  currentOption = value => {
+  currentSelectOption = value => {
     this.setState({ queryType: value.toLowerCase() });
   };
 
-  onChangeGenre = e => {
-    const { genreType } = this.state;
-    e.preventDefault();
-    this.setState({ loading: true });
-    axios
-      .get(`${cors}${api}editorial/${e.target.id}/${genreType}`)
-      .then(res => {
-        console.log("res genre current", res.data);
-        this.setState({
-          genreResult: res.data,
-          loading: false,
-        });
-      })
-      .catch(err => console.log(err));
+  fetchGenres = async () => {
+    try {
+      this.setState({ loading: true });
+      const res = await axios.get(`${cors}${api}genre`);
+      this.setState({ genres: res.data.data, loading: false });
+    } catch (err) {
+      console.log("error", err);
+    }
   };
 
-  findTrack = e => {
-    const { queryTitle, queryType } = this.state;
-    e.preventDefault();
-    this.setState({ loading: true });
-    axios
-      .get(
+  onChangeGenre = async e => {
+    try {
+      const { genreType } = this.state;
+      e.preventDefault();
+      this.setState({ loading: true });
+      const res = await axios.get(
+        `${cors}${api}editorial/${e.target.id}/${genreType}`
+      );
+      this.setState({ genreResult: res.data, loading: false });
+    } catch (err) {
+      console.log("error", err);
+    }
+  };
+
+  findTrack = async e => {
+    try {
+      const { queryTitle, queryType } = this.state;
+      e.preventDefault();
+      this.setState({ loading: true });
+      const res = await axios.get(
         `${cors}${api}search?q=${queryType}:"${queryTitle}"&limit=25`
-      )
-      .then(res => {
-        this.setState({
-          searchResult: res.data.data,
-          queryTitle: "",
-          loading: false,
-        });
-      })
-      .catch(err => console.log(err));
+      );
+      this.setState({
+        searchResult: res.data.data,
+        queryTitle: "",
+        loading: false,
+      });
+    } catch (err) {
+      console.log("err", err);
+    }
   };
 
   render() {
@@ -103,10 +97,10 @@ class Browse extends Component {
         <div className="browse-form">
           <form onSubmit={this.findTrack}>
             <ul className="browse-form__tabs">
-              <li className={`browse-form__tabs-item`}>
+              <li className="browse-form__tabs-item">
                 <input
                   id="filter"
-                  className="browse-form__tabs-input display-none"
+                  className="display-none"
                   type="radio"
                   name="query"
                   value="filter"
@@ -116,9 +110,9 @@ class Browse extends Component {
                 <label htmlFor="filter">Filter</label>
               </li>
 
-              <li className={`browse-form__tabs-item`}>
+              <li className="browse-form__tabs-item">
                 <input
-                  className="browse-form__tabs-input display-none"
+                  className="display-none"
                   type="radio"
                   id="search"
                   name="query"
@@ -130,7 +124,7 @@ class Browse extends Component {
               </li>
             </ul>
             {currentTab === "search" ? (
-              <div className="browse-form__wrapper">
+              <div className="browse-form--wrapper">
                 <div className="browse-form__search">
                   <div className="browse-form__search-input">
                     <button
@@ -147,11 +141,11 @@ class Browse extends Component {
                     />
                   </div>
 
-                  <CustomSelect option={this.currentOption} />
+                  <CustomSelect option={this.currentSelectOption} />
                 </div>
               </div>
             ) : (
-              <div className="browse-form__wrapper center-page">
+              <div className="browse-form--wrapper center-page">
                 <ul
                   className="genre-list"
                   onClick={this.onChangeGenre}
@@ -173,7 +167,7 @@ class Browse extends Component {
         </div>
 
         {loading && <Spinner />}
-        {searchResult && (
+        {searchResult && currentTab === "search" && (
           <ul className="tracks-list">
             {searchResult.map(track => (
               <Track
@@ -185,7 +179,7 @@ class Browse extends Component {
           </ul>
         )}
 
-        {genreResult && (
+        {genreResult && currentTab === "filter" && (
           <ul className="tracks-list">
             {genreResult.tracks.data.map(track => (
               <Track

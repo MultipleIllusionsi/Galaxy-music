@@ -7,6 +7,7 @@ import PlayButton from "../../components/PlayButton/PlayButton";
 import "./ArtistItem.scss";
 
 const ArtistItem = ({ data, sliderClass }) => {
+  console.log("render from ArtistItem");
   return (
     <div className={`ArtistItem ${sliderClass}`}>
       <img

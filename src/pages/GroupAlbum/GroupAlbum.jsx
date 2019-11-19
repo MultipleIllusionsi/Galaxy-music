@@ -1,9 +1,7 @@
 import React, { Component } from "react";
 import axios from "axios";
 
-// import Spinner from "../../components/spinner/Spinner";
-// import CtaButton from "../../components/CtaButton/CtaButton";
-
+import Spinner from "../../components/spinner/Spinner";
 import GroupList from "../../components/GroupList/GroupList";
 
 import "./GroupAlbum.scss";
@@ -22,7 +20,6 @@ class Album extends Component {
         `${cors}${api}editorial/0/releases`
       );
       this.setState({ albums: res.data.data });
-      console.log("res", this.state.albums);
     } catch (err) {
       console.log("error:", err);
     }
@@ -30,11 +27,15 @@ class Album extends Component {
 
   render() {
     const { albums } = this.state;
-
+    console.log("render from groupAlbum");
     return (
       <main className="groupAlbum-page">
         <h3 className="text--big-space pt-md">New Albums</h3>
-        <GroupList to="album" data={albums} provideInfo />
+        {!albums ? (
+          <Spinner />
+        ) : (
+          <GroupList to="album" data={albums} provideInfo />
+        )}
       </main>
     );
   }

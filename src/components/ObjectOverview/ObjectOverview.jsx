@@ -5,6 +5,7 @@ import "./ObjectOverview.scss";
 import Track from "../../components/track/Track";
 
 const ObjectOverview = ({ data }) => {
+  console.log("render from ObjOverw");
   return (
     <main className="Overview-page">
       {data === null ? (

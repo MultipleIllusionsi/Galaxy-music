@@ -5,16 +5,15 @@ import "./CustomSelect.scss";
 class CustomSelect extends Component {
   state = {
     expanded: false,
-    currentOption: "All",
+    currentSelectOption: "All",
   };
 
   toggleSelect = () => {
-    let smth = this.state.expanded;
-    this.setState({ expanded: !smth });
+    this.setState({ expanded: !this.state.expanded });
   };
 
-  chooseOption = e => {
-    this.setState({ currentOption: e.target.dataset.value });
+  chooseSelectOption = e => {
+    this.setState({ currentSelectOption: e.target.dataset.value });
     this.toggleSelect();
   };
 
@@ -24,11 +23,12 @@ class CustomSelect extends Component {
   }
 
   render() {
-    const { expanded, currentOption } = this.state;
+    const { expanded, currentSelectOption } = this.state;
+    console.log("render from customSelect");
     return (
       <ul className="select">
         <div onClick={this.toggleSelect} className="checked-option">
-          <p>{currentOption}</p>
+          <p>{currentSelectOption}</p>
           <p>&#9662;</p>
         </div>
         <ol
@@ -36,7 +36,7 @@ class CustomSelect extends Component {
             expanded === true ? "open" : "close"
           }`}
           onClick={e => {
-            this.chooseOption(e);
+            this.chooseSelectOption(e);
             this.sendOption(e);
           }}
         >

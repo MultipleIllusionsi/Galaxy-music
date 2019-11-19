@@ -17,28 +17,26 @@ class Artist extends Component {
 
   async componentDidMount() {
     try {
-      const res = await axios.get(
-        `${cors}${api}artist/${this.props.match.params.artist_id}`
-      );
-      this.setState({ artistInfo: res.data });
-      console.log("res", res.data);
+      let [artistInfo, artistTrack] = await Promise.all([
+        axios.get(
+          `${cors}${api}artist/${this.props.match.params.artist_id}`
+        ),
+        axios.get(
+          `${cors}${api}artist/${this.props.match.params.artist_id}/top?limit=25`
+        ),
+      ]);
+      this.setState({
+        artistInfo: artistInfo.data,
+        artistTrack: artistTrack.data,
+      });
     } catch (err) {
-      console.log("error:", err);
-    }
-
-    try {
-      const res = await axios.get(
-        `${cors}${api}artist/${this.props.match.params.artist_id}/top?limit=25`
-      );
-      this.setState({ artistTrack: res.data });
-      console.log("res artist", res.data);
-    } catch (err) {
-      console.log("error:", err);
+      console.log("err", err);
     }
   }
 
   render() {
     const { artistInfo, artistTrack } = this.state;
+    console.log("render from ArtistPage");
     return (
       <main className="artist-page">
         {artistInfo === null ? (
@@ -70,9 +68,7 @@ class Artist extends Component {
               </div>
             </section>
 
-            {artistTrack === null ? (
-              <Spinner />
-            ) : (
+            {artistTrack && (
               <ul className="tracks-list">
                 {artistTrack.data.map(track => (
                   <Track

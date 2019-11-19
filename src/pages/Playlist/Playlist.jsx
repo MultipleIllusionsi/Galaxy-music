@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import axios from "axios";
 
+import Spinner from "../../components/spinner/Spinner";
 import ObjectOverview from "../../components/ObjectOverview/ObjectOverview";
 
 const cors = `https://cors-anywhere.herokuapp.com/`;
@@ -17,7 +18,6 @@ class Playlist extends Component {
         `${cors}${api}playlist/${this.props.match.params.id}`
       );
       this.setState({ playlist: res.data });
-      console.log("res", this.state.playlist);
     } catch (err) {
       console.log("error:", err);
     }
@@ -25,7 +25,12 @@ class Playlist extends Component {
 
   render() {
     const { playlist } = this.state;
-    return <ObjectOverview data={playlist} />;
+    console.log("render from playlist solo");
+    return (
+      <>
+        {!playlist ? <Spinner /> : <ObjectOverview data={playlist} />}
+      </>
+    );
   }
 }
 

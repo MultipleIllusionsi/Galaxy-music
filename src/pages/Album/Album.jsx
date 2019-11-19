@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import axios from "axios";
 
+import Spinner from "../../components/spinner/Spinner";
 import ObjectOverview from "../../components/ObjectOverview/ObjectOverview";
 
 const cors = `https://cors-anywhere.herokuapp.com/`;
@@ -17,7 +18,6 @@ class Album extends Component {
         `${cors}${api}album/${this.props.match.params.id}`
       );
       this.setState({ album: res.data });
-      console.log("res", res.data);
     } catch (err) {
       console.log("error:", err);
     }
@@ -25,7 +25,10 @@ class Album extends Component {
 
   render() {
     const { album } = this.state;
-    return <ObjectOverview data={album} />;
+    console.log("render from album solo");
+    return (
+      <>{!album ? <Spinner /> : <ObjectOverview data={album} />}</>
+    );
   }
 }
 

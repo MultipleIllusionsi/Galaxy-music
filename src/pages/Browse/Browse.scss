@@ -3,7 +3,7 @@
 .browse-form {
   background: #eee;
 
-  &__wrapper {
+  &--wrapper {
     padding: 4rem 6rem;
   }
 
@@ -22,7 +22,12 @@
       text-align: center;
       background: #fff;
 
-
+      & input {
+        &:checked~label {
+          background: #37b480;
+          color: #fff;
+        }
+      }
 
       & label {
         display: block;
@@ -31,17 +36,9 @@
         cursor: pointer;
       }
     }
-
-    &-input {
-      &:checked~label {
-        background: #37b480;
-        color: #fff;
-      }
-    }
   }
 
   &__search {
-
     &-input {
       width: 80%;
       display: flex;
