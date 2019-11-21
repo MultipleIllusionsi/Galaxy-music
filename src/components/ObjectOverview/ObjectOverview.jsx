@@ -30,7 +30,7 @@ const ObjectOverview = ({ data }) => {
               <div className="Overview-info">
                 <h2>{data.title}</h2>
                 <p>
-                  <span>Created by</span>
+                  <span>Created by </span>
                   {data.artist ? data.artist.name : data.title}
                 </p>
                 <p>{data.nb_tracks} Songs</p>
