@@ -1,9 +1,9 @@
 import React, { Component } from "react";
 import axios from "axios";
 
-import Track from "../../components/track/Track";
 import Spinner from "../../components/spinner/Spinner";
 import CustomSelect from "../../components/CustomSelect/CustomSelect";
+import Player from "../../components/track/Player";
 
 import "./Browse.scss";
 
@@ -14,6 +14,7 @@ class Browse extends Component {
   state = {
     currentTab: "search",
     genreType: "charts",
+    currentTrack: null,
     queryTitle: "",
     queryType: "",
     genres: null,
@@ -37,6 +38,10 @@ class Browse extends Component {
 
   currentSelectOption = value => {
     this.setState({ queryType: value.toLowerCase() });
+  };
+
+  currentTrackHandler = id => {
+    this.setState({ currentTrack: id });
   };
 
   fetchGenres = async () => {
@@ -89,8 +94,9 @@ class Browse extends Component {
       searchResult,
       genres,
       loading,
+      currentTrack,
     } = this.state;
-
+    console.log("this.state", this.state);
     return (
       <main className="browse-page">
         <div className="secondary-bc"></div>
@@ -170,9 +176,11 @@ class Browse extends Component {
         {searchResult && currentTab === "search" && (
           <ul className="tracks-list">
             {searchResult.map(track => (
-              <Track
+              <Player
+                currentTrack={currentTrack}
+                idHandler={this.currentTrackHandler}
                 key={track.id}
-                cover={track.album.cover_small}
+                cover={track.album.cover_medium}
                 track={track}
               />
             ))}
@@ -182,9 +190,11 @@ class Browse extends Component {
         {genreResult && currentTab === "filter" && (
           <ul className="tracks-list">
             {genreResult.tracks.data.map(track => (
-              <Track
+              <Player
+                currentTrack={currentTrack}
+                idHandler={this.currentTrackHandler}
                 key={track.id}
-                cover={track.album.cover_small}
+                cover={track.album.cover_medium}
                 track={track}
               />
             ))}
