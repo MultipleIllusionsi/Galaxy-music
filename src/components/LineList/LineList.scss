@@ -1,5 +1,5 @@
 .LineList {
-    margin-top: 10rem;
+    margin: 10rem 0;
 
     &__item {
         display: flex;
@@ -15,17 +15,13 @@
         &:hover {
             background: rgba(89, 16, 149, 0.1);
         }
-    }
-}
 
+        &-artist {
+            font-size: 3rem;
 
-
-.LineList-title {}
-
-.LineList-artist {
-    font-size: 3rem;
-
-    & span {
-        color: #8a4fab;
+            & span {
+                color: #8a4fab;
+            }
+        }
     }
 }

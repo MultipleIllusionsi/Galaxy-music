@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
 import axios from "axios";
 import LazyLoad from "react-lazyload";
 
@@ -49,9 +48,7 @@ class Homepage extends Component {
               Browse our roster of rare and emerging independent
               artists, bands and record labels
             </p>
-            <CtaButton>
-              <Link to="/browse">Browse Music</Link>
-            </CtaButton>
+            <CtaButton to="/browse">Browse Music</CtaButton>
           </div>
         </section>
 

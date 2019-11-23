@@ -14,13 +14,13 @@ const Footer = () => {
           <Link to="/">Home</Link>
         </li>
         <li className="footer__list-item">
-          <Link to="/">Browse</Link>
+          <Link to="/browse">Browse</Link>
         </li>
         <li className="footer__list-item">
-          <Link to="/">Charts</Link>
+          <Link to="/charts">Charts</Link>
         </li>
         <li className="footer__list-item">
-          <Link to="/">Contact</Link>
+          <Link to="/contact">Contact</Link>
         </li>
       </ul>
       <p className="footer__copyright">Copyright 2019 Marmoset LLC</p>

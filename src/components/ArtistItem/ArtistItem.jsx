@@ -1,8 +1,7 @@
 import React, { memo } from "react";
-import { Link } from "react-router-dom";
 
 import CtaButton from "../../components/CtaButton/CtaButton";
-import PlayButton from "../../components/PlayButton/PlayButton";
+import PlayLink from "../../components/PlayLink/PlayLink";
 
 import "./ArtistItem.scss";
 
@@ -16,13 +15,11 @@ const ArtistItem = ({ data, sliderClass }) => {
         alt="img"
       />
       <span className="abs-center">
-        <PlayButton to={`/artist/${data.id}`} />
+        <PlayLink to={`/artist/${data.id}`} />
         <h2 className="artist-name">{data.name}</h2>
         <div className="mt-md">
-          <CtaButton>
-            <Link to={`/artist/${data.id}`}>
-              More from this artist
-            </Link>
+          <CtaButton to={`/artist/${data.id}`}>
+            More from this artist
           </CtaButton>
         </div>
       </span>

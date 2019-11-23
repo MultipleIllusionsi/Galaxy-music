@@ -14,7 +14,7 @@ class Browse extends Component {
   state = {
     currentTab: "search",
     genreType: "charts",
-    currentTrack: null,
+    playingTrack: 0,
     queryTitle: "",
     queryType: "",
     genres: null,
@@ -31,6 +31,7 @@ class Browse extends Component {
     this.setState({ currentTab: value }, () => {
       const { genres, currentTab } = this.state;
       if (currentTab === "filter" && genres === null) {
+        console.log("genres were fetched");
         this.fetchGenres();
       }
     });
@@ -40,8 +41,8 @@ class Browse extends Component {
     this.setState({ queryType: value.toLowerCase() });
   };
 
-  currentTrackHandler = id => {
-    this.setState({ currentTrack: id });
+  playingTrackHandler = id => {
+    this.setState({ playingTrack: id });
   };
 
   fetchGenres = async () => {
@@ -74,7 +75,7 @@ class Browse extends Component {
       e.preventDefault();
       this.setState({ loading: true });
       const res = await axios.get(
-        `${cors}${api}search?q=${queryType}:"${queryTitle}"&limit=25`
+        `${cors}${api}search?q=${queryType}:"${queryTitle}"&limit=3`
       );
       this.setState({
         searchResult: res.data.data,
@@ -94,9 +95,10 @@ class Browse extends Component {
       searchResult,
       genres,
       loading,
-      currentTrack,
+      playingTrack,
     } = this.state;
-    console.log("this.state", this.state);
+
+    console.log("playingTrack from parent", playingTrack);
     return (
       <main className="browse-page">
         <div className="secondary-bc"></div>
@@ -177,8 +179,8 @@ class Browse extends Component {
           <ul className="tracks-list">
             {searchResult.map(track => (
               <Player
-                currentTrack={currentTrack}
-                idHandler={this.currentTrackHandler}
+                isPlaying={track.id === playingTrack ? true : false}
+                handler={this.playingTrackHandler}
                 key={track.id}
                 cover={track.album.cover_medium}
                 track={track}
@@ -191,8 +193,8 @@ class Browse extends Component {
           <ul className="tracks-list">
             {genreResult.tracks.data.map(track => (
               <Player
-                currentTrack={currentTrack}
-                idHandler={this.currentTrackHandler}
+                isPlaying={track.id === playingTrack ? true : false}
+                handler={this.playingTrackHandler}
                 key={track.id}
                 cover={track.album.cover_medium}
                 track={track}

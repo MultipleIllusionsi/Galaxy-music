@@ -1,6 +1,6 @@
 import React from "react";
 
-import PlayButton from "../../components/PlayButton/PlayButton";
+import PlayLink from "../../components/PlayLink/PlayLink";
 
 import "./GroupList.scss";
 
@@ -28,7 +28,7 @@ const GroupList = ({ data, provideInfo, to }) => {
             >
               <div className="gradient-overlay">
                 <span className="abs-center">
-                  <PlayButton to={`/${to}/${id}`} type="hover" />
+                  <PlayLink to={`/${to}/${id}`} type="hover" />
                 </span>
               </div>
 

@@ -1,14 +1,14 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-import "./PlayButton.scss";
+import "./PlayLink.scss";
 
-const PlayButton = ({ to, type }) => {
+const PlayLink = ({ to, type }) => {
   let classes;
   if (type === "hover") {
-    classes = "play-button__hover";
+    classes = "play-link__hover";
   } else {
-    classes = "play-button__usual";
+    classes = "play-link__usual";
   }
 
   return (
@@ -18,4 +18,4 @@ const PlayButton = ({ to, type }) => {
   );
 };
 
-export default PlayButton;
+export default PlayLink;

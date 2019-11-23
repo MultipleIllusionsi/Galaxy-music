@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import axios from "axios";
 
 import Spinner from "../../components/spinner/Spinner";
-import Track from "../../components/track/Track";
+import Player from "../../components/track/Player";
 
 import "./Artist.scss";
 
@@ -13,6 +13,7 @@ class Artist extends Component {
   state = {
     artistInfo: null,
     artistTrack: null,
+    playingTrack: 0,
   };
 
   async componentDidMount() {
@@ -34,8 +35,12 @@ class Artist extends Component {
     }
   }
 
+  playingTrackHandler = id => {
+    this.setState({ playingTrack: id });
+  };
+
   render() {
-    const { artistInfo, artistTrack } = this.state;
+    const { artistInfo, artistTrack, playingTrack } = this.state;
     console.log("render from ArtistPage");
     return (
       <main className="artist-page">
@@ -71,7 +76,11 @@ class Artist extends Component {
             {artistTrack && (
               <ul className="tracks-list">
                 {artistTrack.data.map(track => (
-                  <Track
+                  <Player
+                    isPlaying={
+                      track.id === playingTrack ? true : false
+                    }
+                    handler={this.playingTrackHandler}
                     key={`${track.id}`}
                     cover={track.album.cover_small}
                     track={track}

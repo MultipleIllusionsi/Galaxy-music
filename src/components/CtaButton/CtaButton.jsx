@@ -1,9 +1,13 @@
 import React from "react";
+import { Link } from "react-router-dom";
+
 import "./CtaButton.scss";
 
-const CtaButton = ({ children }) => (
-  <div className="cta-button--wrapper">
-    <div className="cta-button">{children}</div>
+const CtaButton = ({ children, to }) => (
+  <div className="CtaButton__wrapper">
+    <Link className="CtaButton__link" to={to}>
+      <div className="CtaButton__inner">{children}</div>
+    </Link>
   </div>
 );
 

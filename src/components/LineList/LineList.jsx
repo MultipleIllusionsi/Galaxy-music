@@ -5,9 +5,9 @@ import CtaButton from "../../components/CtaButton/CtaButton";
 
 import "./LineList.scss";
 
-const sliceStr = (str, num) => {
-  if (str.length > num) {
-    return `${str.slice(0, num)}...`;
+const sliceStr = (str, maxStrInTheRow) => {
+  if (str.length > maxStrInTheRow) {
+    return `${str.slice(0, maxStrInTheRow)}...`;
   } else {
     return str;
   }
@@ -23,7 +23,7 @@ const LineList = ({ data }) => {
             <Link key={dataItem.id} to={`/album/${dataItem.id}`}>
               <li className="LineList__item">
                 <span>{sliceStr(dataItem.title, 35)}</span>
-                <span className="LineList-artist">
+                <span className="LineList__item-artist">
                   <span>by </span>
                   {dataItem.artist.name}
                 </span>
@@ -31,9 +31,7 @@ const LineList = ({ data }) => {
             </Link>
           ))}
         </ul>
-        <CtaButton>
-          <Link to="/charts">Get more albums</Link>
-        </CtaButton>
+        <CtaButton to="/charts">Get more albums</CtaButton>
       </>
     </div>
   );

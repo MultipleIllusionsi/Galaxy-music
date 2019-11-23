@@ -1,6 +1,5 @@
 @import "../../assets/sass/mixins.scss";
 
-
 .grouplist {
     padding: 1rem;
     display: flex;
@@ -42,7 +41,7 @@
         transition: 0.5s all;
         position: relative;
 
-        &:hover .play-button__hover {
+        &:hover .play-link__hover {
             opacity: 1;
         }
 

@@ -1,23 +1,30 @@
 @import "../../assets/sass/mixins.scss";
 
-.cta-button {
-  border: 2px solid whitesmoke;
-  background-color: transparent;
-  display: inline-block;
-  padding: 1rem 5rem;
-  font-size: 1.5rem;
-  font-weight: bold;
-  @include Quando;
-  text-transform: uppercase;
-  transition: 0.3s all ease-out;
-
-  &:hover {
-    background-color: whitesmoke;
-    color: #8a4fab;
-  }
-
-  &--wrapper {
+.CtaButton {
+  &__wrapper {
     width: 100%;
     text-align: center;
+  }
+
+  &__link {
+    display: inline-block;
+    text-align: center;
+  }
+
+  &__inner {
+    border: 2px solid whitesmoke;
+    background-color: transparent;
+    display: inline-block;
+    padding: 1rem 5rem;
+    font-size: 1.5rem;
+    font-weight: bold;
+    @include Quando;
+    text-transform: uppercase;
+    transition: 0.3s all ease-out;
+
+    &:hover {
+      background-color: whitesmoke;
+      color: #8a4fab;
+    }
   }
 }
