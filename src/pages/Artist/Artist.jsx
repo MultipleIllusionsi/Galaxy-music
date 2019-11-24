@@ -1,98 +1,70 @@
-import React, { Component } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
 
 import Spinner from "../../components/spinner/Spinner";
 import Player from "../../components/track/Player";
+import Intro from "./Intro";
 
 import "./Artist.scss";
 
 const cors = `https://cors-anywhere.herokuapp.com/`;
 const api = `http://api.deezer.com/`;
 
-class Artist extends Component {
-  state = {
+const Artist = props => {
+  const [data, setData] = useState({
     artistInfo: null,
     artistTrack: null,
-    playingTrack: 0,
-  };
+  });
 
-  async componentDidMount() {
-    try {
-      let [artistInfo, artistTrack] = await Promise.all([
-        axios.get(
-          `${cors}${api}artist/${this.props.match.params.artist_id}`
-        ),
-        axios.get(
-          `${cors}${api}artist/${this.props.match.params.artist_id}/top?limit=25`
-        ),
-      ]);
-      this.setState({
-        artistInfo: artistInfo.data,
-        artistTrack: artistTrack.data,
-      });
-    } catch (err) {
-      console.log("err", err);
-    }
-  }
+  const [playingTrack, setPlayingTrack] = useState(0);
 
-  playingTrackHandler = id => {
-    this.setState({ playingTrack: id });
-  };
+  useEffect(() => {
+    const { artist_id } = props.match.params;
+    const fetchData = async () => {
+      try {
+        let [artistInfo, artistTrack] = await Promise.all([
+          axios.get(`${cors}${api}artist/${artist_id}`),
+          axios.get(`${cors}${api}artist/${artist_id}/top?limit=25`),
+        ]);
+        setData({
+          artistInfo: artistInfo.data,
+          artistTrack: artistTrack.data,
+        });
+      } catch (err) {
+        console.log("err", err);
+      }
+    };
+    fetchData();
+  }, [props.match.params]);
 
-  render() {
-    const { artistInfo, artistTrack, playingTrack } = this.state;
-    console.log("render from ArtistPage");
-    return (
-      <main className="artist-page">
-        {artistInfo === null ? (
-          <Spinner />
-        ) : (
-          <>
-            <div className="secondary-bc"></div>
-            <section className="quick-intro">
-              <div className="quick-intro__icon">
-                <span></span>
-              </div>
-              <h2 className="heading-primary">{artistInfo.name}</h2>
-              <p className="quick-intro__genre"></p>
-            </section>
-            <section className="full-intro">
-              <div className="full-intro__img">
-                <img src={artistInfo.picture_big} alt="img" />
-              </div>
-              <div className="full-intro__bio">
-                <h3>{artistInfo.name}</h3>
-                <p>Number of albums: {artistInfo.nb_album}</p>
-                <p>
-                  Lorem ipsum dolor sit amet consectetur adipisicing
-                  elit. Est, quis magni? At, magni a! Adipisci
-                  assumenda quidem suscipit pariatur voluptate,
-                  maiores doloribus architecto placeat corporis at
-                  omnis aut molestias nemo.
-                </p>
-              </div>
-            </section>
+  const { artistInfo, artistTrack } = data;
+  console.log("render from ArtistPage");
+  return (
+    <main className="artist-page">
+      {artistInfo === null ? (
+        <Spinner />
+      ) : (
+        <>
+          <div className="secondary-bc"></div>
+          <Intro info={artistInfo} />
 
-            {artistTrack && (
-              <ul className="tracks-list">
-                {artistTrack.data.map(track => (
-                  <Player
-                    isPlaying={
-                      track.id === playingTrack ? true : false
-                    }
-                    handler={this.playingTrackHandler}
-                    key={`${track.id}`}
-                    cover={track.album.cover_small}
-                    track={track}
-                  />
-                ))}
-              </ul>
-            )}
-          </>
-        )}
-      </main>
-    );
-  }
-}
+          {artistTrack && (
+            <ul className="tracks-list">
+              {artistTrack.data.map(track => (
+                <Player
+                  isPlaying={track.id === playingTrack ? true : false}
+                  handler={setPlayingTrack}
+                  key={`${track.id}`}
+                  cover={track.album.cover_small}
+                  track={track}
+                />
+              ))}
+            </ul>
+          )}
+        </>
+      )}
+    </main>
+  );
+};
 
 export default Artist;

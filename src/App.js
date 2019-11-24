@@ -4,6 +4,7 @@ import { Route, Switch } from "react-router-dom";
 import Navbar from "./components/navbar/Navbar";
 import Footer from "./components/footer/Footer";
 import Spinner from "./components/spinner/Spinner";
+import ErrorBoundary from "./components/ErrorBoundary/ErrorBoundary";
 
 import "./App.scss";
 
@@ -20,19 +21,16 @@ const App = () => (
   <>
     <Navbar />
     <Switch>
-      <Suspense fallback={<Spinner />}>
-        <Route exact path="/" component={Homepage} />
-        <Route exact path="/browse" component={Browse} />
-        <Route
-          exact
-          path="/genre/:id/artist/:artist_id"
-          component={Artist}
-        />
-        <Route exact path="/album/:id" component={Album} />
-        <Route exact path="/charts" component={GroupAlbum} />
-        <Route exact path="/playlist/:id" component={Playlist} />
-        <Route exact path="/artist/:artist_id" component={Artist} />
-      </Suspense>
+      <ErrorBoundary>
+        <Suspense fallback={<Spinner />}>
+          <Route exact path="/" component={Homepage} />
+          <Route exact path="/browse" component={Browse} />
+          <Route exact path="/album/:id" component={Album} />
+          <Route exact path="/charts" component={GroupAlbum} />
+          <Route exact path="/playlist/:id" component={Playlist} />
+          <Route exact path="/artist/:artist_id" component={Artist} />
+        </Suspense>
+      </ErrorBoundary>
     </Switch>
     <Footer />
   </>

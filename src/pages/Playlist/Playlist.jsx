@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
 
 import Spinner from "../../components/spinner/Spinner";
@@ -7,31 +7,29 @@ import ObjectOverview from "../../components/ObjectOverview/ObjectOverview";
 const cors = `https://cors-anywhere.herokuapp.com/`;
 const api = `http://api.deezer.com/`;
 
-class Playlist extends Component {
-  state = {
-    playlist: null,
-  };
+const Playlist = props => {
+  const [playlist, setPlaylist] = useState(null);
 
-  async componentDidMount() {
-    try {
-      const res = await axios.get(
-        `${cors}${api}playlist/${this.props.match.params.id}`
-      );
-      this.setState({ playlist: res.data });
-    } catch (err) {
-      console.log("error:", err);
-    }
-  }
+  useEffect(() => {
+    const { id } = props.match.params;
+    const fetchData = async () => {
+      try {
+        const res = await axios.get(`${cors}${api}playlist/${id}`);
+        setPlaylist(res.data);
+      } catch (err) {
+        console.log("error:", err);
+      }
+    };
 
-  render() {
-    const { playlist } = this.state;
-    console.log("render from playlist solo");
-    return (
-      <>
-        {!playlist ? <Spinner /> : <ObjectOverview data={playlist} />}
-      </>
-    );
-  }
-}
+    fetchData();
+  }, [props.match.params]);
+
+  console.log("render from playlist solo");
+  return (
+    <>
+      {!playlist ? <Spinner /> : <ObjectOverview data={playlist} />}
+    </>
+  );
+};
 
 export default Playlist;

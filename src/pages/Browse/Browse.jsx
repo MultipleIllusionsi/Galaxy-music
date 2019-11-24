@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import axios from "axios";
 
 import Spinner from "../../components/spinner/Spinner";
-import CustomSelect from "../../components/CustomSelect/CustomSelect";
+import BrowserForm from "./BrowseForm";
 import Player from "../../components/track/Player";
 
 import "./Browse.scss";
@@ -12,15 +12,15 @@ const api = `http://api.deezer.com/`;
 
 class Browse extends Component {
   state = {
-    currentTab: "search",
+    currentTab: "search", //
     genreType: "charts",
-    playingTrack: 0,
+    playingTrack: 0, //
     queryTitle: "",
     queryType: "",
     genres: null,
-    filterResult: null,
-    searchResult: null,
-    loading: false,
+    filterResult: null, //
+    searchResult: null, //
+    loading: false, //
   };
 
   onChangeSearchInput = ({ target: { value } }) => {
@@ -75,7 +75,7 @@ class Browse extends Component {
       e.preventDefault();
       this.setState({ loading: true });
       const res = await axios.get(
-        `${cors}${api}search?q=${queryType}:"${queryTitle}"&limit=3`
+        `${cors}${api}search?q=${queryType}:"${queryTitle}"&limit=10`
       );
       this.setState({
         searchResult: res.data.data,
@@ -98,81 +98,21 @@ class Browse extends Component {
       playingTrack,
     } = this.state;
 
-    console.log("playingTrack from parent", playingTrack);
     return (
       <main className="browse-page">
         <div className="secondary-bc"></div>
-        <div className="browse-form">
-          <form onSubmit={this.findTrack}>
-            <ul className="browse-form__tabs">
-              <li className="browse-form__tabs-item">
-                <input
-                  id="filter"
-                  className="display-none"
-                  type="radio"
-                  name="query"
-                  value="filter"
-                  onChange={this.handleTabs}
-                  checked={currentTab === "filter" && true}
-                />
-                <label htmlFor="filter">Filter</label>
-              </li>
-
-              <li className="browse-form__tabs-item">
-                <input
-                  className="display-none"
-                  type="radio"
-                  id="search"
-                  name="query"
-                  value="search"
-                  onChange={this.handleTabs}
-                  checked={currentTab === "search" && true}
-                />
-                <label htmlFor="search">Search</label>
-              </li>
-            </ul>
-            {currentTab === "search" ? (
-              <div className="browse-form--wrapper">
-                <div className="browse-form__search">
-                  <div className="browse-form__search-input">
-                    <button
-                      className="search-button"
-                      type="submit"
-                      aria-label="search button"
-                    ></button>
-                    <input
-                      type="text"
-                      placeholder="Title..."
-                      name="queryTitle"
-                      value={queryTitle}
-                      onChange={this.onChangeSearchInput}
-                    />
-                  </div>
-
-                  <CustomSelect option={this.currentSelectOption} />
-                </div>
-              </div>
-            ) : (
-              <div className="browse-form--wrapper center-page">
-                <ul
-                  className="genre-list"
-                  onClick={this.onChangeGenre}
-                >
-                  {genres &&
-                    genres.map(genre => (
-                      <li
-                        id={genre.id}
-                        className="genre-list__item"
-                        key={genre.id}
-                      >
-                        {genre.name}
-                      </li>
-                    ))}
-                </ul>
-              </div>
-            )}
-          </form>
-        </div>
+        <BrowserForm
+          // search stuff
+          findTrack={this.findTrack}
+          handleTabs={this.handleTabs}
+          currentTab={currentTab}
+          queryTitle={queryTitle}
+          onChangeSearchInput={this.onChangeSearchInput}
+          currentSelectOption={this.currentSelectOption}
+          // filter stuff
+          onChangeGenre={this.onChangeGenre}
+          genres={genres}
+        />
 
         {loading && <Spinner />}
         {searchResult && currentTab === "search" && (

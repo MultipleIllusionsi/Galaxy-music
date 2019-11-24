@@ -11,25 +11,27 @@ class Slider extends Component {
     total: this.props.total,
   };
 
-  btnClick = ({ target }) => {
-    if (target.dataset.type === "left") {
-      if (this.state.currentObj > 1) {
+  btnClick = e => {
+    const { currentObj, total } = this.state;
+    const { type } = e.target.dataset;
+    if (type === "left") {
+      if (currentObj > 1) {
         this.setState((prevState, _props) => ({
           currentObj: prevState.currentObj - 1,
         }));
-      } else if (this.state.currentObj === 1) {
+      } else if (currentObj === 1) {
         this.setState(() => ({
-          currentObj: this.state.total,
+          currentObj: total,
         }));
       }
     }
 
-    if (target.dataset.type === "right") {
-      if (this.state.currentObj < this.state.total) {
+    if (type === "right") {
+      if (currentObj < total) {
         this.setState((prevState, _props) => ({
           currentObj: prevState.currentObj + 1,
         }));
-      } else if (this.state.currentObj === this.state.total) {
+      } else if (currentObj === total) {
         this.setState(() => ({
           currentObj: 1,
         }));
@@ -39,6 +41,7 @@ class Slider extends Component {
 
   render() {
     const { currentObj } = this.state;
+    const { data } = this.props;
     console.log("---render from slider---");
     return (
       <div className="slider-wrapper">
@@ -55,10 +58,10 @@ class Slider extends Component {
           ></button>
         </div>
 
-        {!this.props.data ? (
+        {!data ? (
           <Spinner />
         ) : (
-          this.props.data.map(item => (
+          data.map(item => (
             <ArtistItem
               sliderClass={
                 currentObj === item.position
