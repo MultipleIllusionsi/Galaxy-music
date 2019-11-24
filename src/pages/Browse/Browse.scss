@@ -23,6 +23,8 @@
       background: #fff;
 
       & input {
+        display: none;
+
         &:checked~label {
           background: #37b480;
           color: #fff;
@@ -34,6 +36,12 @@
         width: 100%;
         padding: 3rem;
         cursor: pointer;
+        border: 0.5rem solid transparent;
+        transition: 0.2s all ease-in;
+
+        &:hover {
+          border: 0.5rem solid #37b480;
+        }
       }
     }
   }
