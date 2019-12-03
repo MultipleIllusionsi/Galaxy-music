@@ -13,6 +13,7 @@ const Album = lazy(() => import("./pages/Album/Album"));
 const Homepage = lazy(() => import("./pages/Homepage/Homepage"));
 const Playlist = lazy(() => import("./pages/Playlist/Playlist"));
 const Artist = lazy(() => import("./pages/Artist/Artist"));
+const Contact = lazy(() => import("./pages/Contact/Contact"));
 const GroupAlbum = lazy(() =>
   import("./pages/GroupAlbum/GroupAlbum")
 );
@@ -27,6 +28,7 @@ const App = () => (
           <Route exact path="/browse" component={Browse} />
           <Route exact path="/album/:id" component={Album} />
           <Route exact path="/charts" component={GroupAlbum} />
+          <Route exact path="/contact" component={Contact} />
           <Route exact path="/playlist/:id" component={Playlist} />
           <Route exact path="/artist/:artist_id" component={Artist} />
         </Suspense>

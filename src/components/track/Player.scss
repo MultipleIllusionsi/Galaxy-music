@@ -2,18 +2,18 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 2rem 1rem;
+    padding: 2rem;
     background-color: transparent;
     border: 1px solid rgb(200, 200, 200);
 
     .controls {
         width: 100%;
         display: flex;
-        justify-content: space-around;
+        justify-content: space-between;
         align-items: center;
 
         &-button {
-            width: 10%;
+            width: 7%;
             background-repeat: no-repeat;
             background-size: contain;
             background-position: center;
@@ -24,7 +24,7 @@
 
     .data {
         padding: 2rem 0;
-        width: 80%;
+        width: 90%;
         display: flex;
         justify-content: space-between;
         align-items: center;
@@ -33,6 +33,7 @@
             width: 20%;
             color: black;
             font-size: 2.5rem;
+            text-align: right;
         }
 
         .title {

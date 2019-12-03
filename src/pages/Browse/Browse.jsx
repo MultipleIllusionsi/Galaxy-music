@@ -12,6 +12,7 @@ const Browse = () => {
   const [searchData, setSearchData] = useState(null);
   const [playingTrack, setPlayingTrack] = useState(0);
   const [loading, setLoading] = useState(false);
+  console.log("searchData", searchData);
 
   return (
     <main className="browse-page">
