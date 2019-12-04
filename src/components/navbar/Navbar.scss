@@ -6,30 +6,103 @@
   left: 0;
   width: 100%;
   z-index: 5000;
+
+  @include response(phone) {
+    position: fixed;
+  }
 }
 
 .navbar {
   max-width: 120rem;
   margin: 0 auto;
+  padding: 1rem;
+
+  display: flex;
+  align-items: center;
   position: relative;
   @include Quando;
 
+  @include response(phone) {
+    background-color: black;
+  }
+
+  .hamburger {
+    display: none;
+    position: relative;
+    background: transparent;
+
+    & span,
+    span::before,
+    span::after {
+      display: block;
+      height: 20%;
+      width: 100%;
+      border-radius: 20%;
+      background-color: white;
+    }
+
+    & span {
+      &::before {
+        content: "";
+        position: absolute;
+        top: 0;
+      }
+
+      &::after {
+        content: "";
+        position: absolute;
+        bottom: 0;
+      }
+    }
+
+    @include response(phone) {
+      margin: 0 2rem;
+      margin-left: auto;
+      display: block;
+      height: 3rem;
+      width: 3rem;
+      border: none;
+      z-index: 500;
+    }
+  }
+
   .logo {
     font-size: 5rem;
+    margin: 0 2rem;
 
     &::after {
       content: none;
     }
+    @include response(phone) {
+      font-size: 3rem;
+    }
   }
 
   &__list {
-    padding: 1rem;
     display: flex;
     align-items: center;
     width: 100%;
+    transition: 1s all cubic-bezier(0.5, 1, 0.22, 1);
 
     @include response(phone) {
+      padding: 1rem;
+      width: 40%;
+      display: block;
+      background: #f8f7f7;
+      opacity: 0;
+      visibility: hidden;
+      position: fixed;
+      top: 10%;
+      right: -105%;
       flex-direction: column;
+    }
+
+    &--opened {
+      @include response(phone) {
+        visibility: visible;
+        opacity: 1;
+        right: 0;
+      }
     }
 
     &-item {
@@ -37,12 +110,23 @@
       font-size: 2rem;
       position: relative;
 
-      &:nth-child(2) {
+      &:nth-child(1) {
         margin-left: auto;
 
         @include response(phone) {
-          margin-left: 2rem;
+          margin: 0.5rem 0;
+          // padding: 0 1rem;
+          border: 2px solid #959290;
+          color: #3a3532;
         }
+      }
+
+      @include response(phone) {
+        text-align: center;
+        margin: 0.5rem 0;
+        // padding: 0 1rem;
+        border: 2px solid #959290;
+        color: #3a3532;
       }
 
       &::after {
