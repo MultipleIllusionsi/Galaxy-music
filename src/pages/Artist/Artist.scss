@@ -1,3 +1,5 @@
+@import "../../assets/sass/mixins.scss";
+
 .artist-page {
     color: black;
 }
@@ -6,6 +8,10 @@
     padding: 3rem 0;
     background: #efefed;
     text-align: center;
+
+    @include response(phone) {
+        padding: 1.5rem 0;
+    }
 
     &__genre {
         font-size: 1.6rem;
@@ -43,6 +49,10 @@
     font-size: 4.6rem;
     font-weight: 400;
     letter-spacing: 0.1rem;
+
+    @include response(phone) {
+        font-size: 3.5rem;
+    }
 }
 
 .full-intro {
@@ -52,9 +62,20 @@
     display: flex;
     justify-content: center;
 
+    @include response(phone) {
+        margin-top: 0;
+        flex-direction: column;
+        padding: 0 2rem;
+    }
+
     &__img {
         margin: 1rem;
         width: 40%;
+
+        @include response(phone) {
+            width: 100%;
+            margin: 0;
+        }
 
         & img {
             height: 100%;
@@ -69,6 +90,11 @@
         background-color: rgb(49, 49, 49);
         color: #AAA;
 
+        @include response(phone) {
+            width: 100%;
+            margin: 0;
+        }
+
         & h3 {
             font-size: 3.6rem;
             color: whitesmoke;
@@ -79,5 +105,4 @@
             font-size: 2rem;
         }
     }
-
 }

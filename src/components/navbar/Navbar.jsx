@@ -17,7 +17,7 @@ const Navbar = ({ location: { pathname } }) => {
 
   return (
     <header className="header">
-      <nav className="navbar">
+      <nav style={style} className="navbar">
         <div className="logo">
           <NavLink to="/">Galaxy</NavLink>
         </div>
@@ -32,7 +32,6 @@ const Navbar = ({ location: { pathname } }) => {
           className={`navbar__list ${
             isOpen ? "navbar__list--opened" : ""
           } `}
-          style={style}
           onClick={() => setOpen(false)}
         >
           <li className="navbar__list-item">

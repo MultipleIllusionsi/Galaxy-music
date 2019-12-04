@@ -23,4 +23,8 @@
 .artist-name {
     font-size: 5rem;
     text-align: center;
+
+    @include response(phone) {
+        font-size: 4rem;
+    }
 }

@@ -132,15 +132,19 @@
 
   &__item {
     padding: 2rem;
-    width: calc(16%);
+    width: 16%;
     margin: 0.2rem;
     background-color: #fff;
     align-self: stretch;
     cursor: pointer;
 
+    @include response(tab-port) {
+      width: auto;
+      padding: 2rem;
+    }
+
     @include response(phone) {
-      width: 30%;
-      padding: 1rem 0;
+      padding: 1rem;
     }
 
     &:hover {

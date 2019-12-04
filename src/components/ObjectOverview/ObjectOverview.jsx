@@ -7,7 +7,6 @@ import Player from "../../components/Player/Player";
 const ObjectOverview = props => {
   const [playingTrack, setPlayingTrack] = useState(0);
 
-  console.log("render from ObjOverw");
   const { data } = props;
   return (
     <main className="Overview-page">
