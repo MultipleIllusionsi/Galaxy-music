@@ -1,5 +1,8 @@
 import React, { useEffect } from "react";
 
+import { ReactComponent as PlayIcon } from "../../assets/play.svg";
+import { ReactComponent as PauseIcon } from "../../assets/pause.svg";
+
 import "./Player.scss";
 
 const Player = props => {
@@ -34,7 +37,7 @@ const Player = props => {
               className="player__button"
               onClick={e => props.handler(+e.currentTarget.id)}
             >
-              <div className="icon-pause"></div>
+              <PauseIcon className="icon-pause" />
             </button>
           ) : (
             <button
@@ -42,7 +45,7 @@ const Player = props => {
               className="player__button"
               onClick={e => props.handler(+e.currentTarget.id)}
             >
-              <div className="icon-play"></div>
+              <PlayIcon className="icon-play" />
             </button>
           )}
         </div>
