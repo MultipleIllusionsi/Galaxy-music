@@ -2,7 +2,7 @@ import React, { useState } from "react";
 
 import Spinner from "../../components/spinner/Spinner";
 import BrowserForm from "./BrowseForm";
-import Player from "../../components/track/Player";
+import Player from "../../components/Player/Player";
 
 import "./Browse.scss";
 

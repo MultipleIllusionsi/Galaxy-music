@@ -1,5 +1,11 @@
+@import "../../assets/sass/mixins.scss";
+
 .LineList {
     margin: 10rem 0;
+
+    & a {
+        display: block;
+    }
 
     &__item {
         display: flex;
@@ -12,12 +18,24 @@
         border-bottom: 1px solid rgba(89, 16, 149, 0.5);
         transition: 0.2s all ease-out;
 
+        @include response(phone) {
+            line-height: 4rem;
+            font-size: 3.5rem;
+            flex-direction: column;
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
         &:hover {
             background: rgba(89, 16, 149, 0.1);
         }
 
         &-artist {
             font-size: 3rem;
+
+            @include response(phone) {
+                font-size: 2rem;
+            }
 
             & span {
                 color: #8a4fab;

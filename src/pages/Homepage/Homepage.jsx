@@ -41,7 +41,7 @@ const Homepage = () => {
   }, []);
 
   const { artists, playlists, albums } = data;
-  console.log("render from HOMEPAGE");
+
   return (
     <main className="homepage">
       <section className="homepage__section-hero">

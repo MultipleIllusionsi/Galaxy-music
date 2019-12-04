@@ -61,7 +61,7 @@ const Contact = () => (
       </ul>
       <p className="contact-page__connect">
         We’re always happy to connect! <br /> For career and
-        internship opportunities, introduce yourself at at
+        internship opportunities, introduce yourself at at &nbsp;
         <a href="mailto:opportunities@galaxy.com">
           opportunities@galaxy.com.
         </a>

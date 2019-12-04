@@ -50,6 +50,7 @@
         }
 
         & ul {
+            margin-top: 10vh;
             display: flex;
             justify-content: space-between;
         }
@@ -89,7 +90,7 @@
     }
 
     &__connect {
-        margin-top: 5vh;
+        margin: 10vh 0;
         color: #5e5e5e;
         font-size: 2rem;
 

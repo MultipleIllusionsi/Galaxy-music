@@ -17,10 +17,10 @@ html {
 body {
     @include Judson;
     line-height: 1.6;
-    min-width: 32rem;
     color: whitesmoke;
     background-color: #f8f8f8;
     max-width: 192rem;
+    min-width: 32rem;
     margin: 0 auto;
 }
 

@@ -1,3 +1,5 @@
+@import "../../assets/sass/mixins.scss";
+
 .play-link__usual {
     background-image: url(../../assets/icons.png);
     height: 7rem;
@@ -20,6 +22,10 @@
     background-position: -13rem -769.1rem;
     background-repeat: no-repeat;
     transition: 0.15s all linear;
+
+    @include no-hover {
+        opacity: 1;
+    }
 
     &:hover {
         opacity: 1;

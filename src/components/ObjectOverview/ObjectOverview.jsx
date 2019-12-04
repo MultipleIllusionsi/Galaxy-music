@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import Spinner from "../../components/spinner/Spinner";
 
 import "./ObjectOverview.scss";
-import Player from "../../components/track/Player";
+import Player from "../../components/Player/Player";
 
 const ObjectOverview = props => {
   const [playingTrack, setPlayingTrack] = useState(0);

@@ -41,6 +41,12 @@
         transition: 0.5s all;
         position: relative;
 
+        @include response(phone) {
+            width: 49%;
+        }
+
+
+
         &:hover .play-link__hover {
             opacity: 1;
         }
