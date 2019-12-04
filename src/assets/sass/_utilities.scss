@@ -21,7 +21,10 @@
     background-size: cover;
     background-repeat: no-repeat;
     height: 25rem;
-    padding-top: 25rem;
+
+    @include response(phone) {
+        height: 6.5rem;
+    }
 }
 
 main {
@@ -52,6 +55,10 @@ li {
     padding: 2rem 0;
     max-width: 120rem;
     margin: 3rem auto 0;
+
+    @include response(phone) {
+        margin-top: 0;
+    }
 }
 
 .text--big-space {

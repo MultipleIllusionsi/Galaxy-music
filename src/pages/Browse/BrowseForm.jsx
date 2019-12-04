@@ -37,15 +37,17 @@ const BrowseForm = props => {
   };
 
   const onChangeGenre = async e => {
-    try {
-      setLoading(true);
-      const res = await axios.get(
-        `${cors}${api}editorial/${e.target.id}/charts`
-      );
-      setLoading(false);
-      setFilterData(res.data);
-    } catch (error) {
-      console.log("error", error);
+    if (e.target.id) {
+      try {
+        setLoading(true);
+        const res = await axios.get(
+          `${cors}${api}editorial/${e.target.id}/charts`
+        );
+        setLoading(false);
+        setFilterData(res.data);
+      } catch (error) {
+        console.log("error", error);
+      }
     }
   };
 
@@ -62,7 +64,15 @@ const BrowseForm = props => {
     try {
       setLoading(true);
       const res = await axios.get(`${cors}${api}genre`);
-      setGenres(res.data.data);
+
+      if (window.innerWidth > 600) {
+        const resFull = res.data.data.slice(0, 25);
+        setGenres(resFull);
+      } else {
+        const resCutted = res.data.data.slice(0, 9);
+        setGenres(resCutted);
+      }
+
       setLoading(false);
     } catch (error) {
       console.log("error", error);
