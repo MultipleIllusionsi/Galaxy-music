@@ -1,3 +1,5 @@
+@import "../../assets//sass/mixins.scss";
+
 .contact-page {
     color: black;
 
@@ -15,6 +17,10 @@
         padding: 3rem 10rem;
         text-align: center;
 
+        @include response(phone) {
+            padding: 2rem 3rem;
+        }
+
         & h2 {
             font-size: 4rem;
             font-weight: 400;
@@ -24,6 +30,11 @@
             font-size: 2rem;
             font-style: normal;
             color: #8a4fab;
+            line-height: 2.5rem;
+
+            &:first-of-type {
+                margin-bottom: 1rem;
+            }
         }
 
         &--wrapper {
@@ -50,13 +61,23 @@
         }
 
         & ul {
-            margin-top: 10vh;
+            margin-top: 5vh;
             display: flex;
+            flex-wrap: wrap;
             justify-content: space-between;
         }
 
         &-item {
+            margin: 3rem 0;
             width: 22%;
+
+            @include response(tab-port) {
+                width: 48%;
+            }
+
+            @include response(phone) {
+                width: 100%;
+            }
 
             &>* {
                 padding: 1rem 0;

@@ -73,6 +73,7 @@
     &::after {
       content: none;
     }
+
     @include response(phone) {
       font-size: 3rem;
     }
@@ -86,13 +87,13 @@
 
     @include response(phone) {
       padding: 1rem;
-      width: 40%;
+      width: 50%;
       display: block;
       background: #f8f7f7;
       opacity: 0;
       visibility: hidden;
       position: fixed;
-      top: 10%;
+      top: 11%;
       right: -105%;
       flex-direction: column;
     }
@@ -110,12 +111,16 @@
       font-size: 2rem;
       position: relative;
 
+      & a {
+        display: block;
+      }
+
       &:nth-child(1) {
         margin-left: auto;
 
         @include response(phone) {
-          margin: 0.5rem 0;
-          // padding: 0 1rem;
+          margin: 1rem 0;
+          padding: 1rem;
           border: 2px solid #959290;
           color: #3a3532;
         }
@@ -123,8 +128,8 @@
 
       @include response(phone) {
         text-align: center;
-        margin: 0.5rem 0;
-        // padding: 0 1rem;
+        margin: 1rem 0;
+        padding: 1rem;
         border: 2px solid #959290;
         color: #3a3532;
       }

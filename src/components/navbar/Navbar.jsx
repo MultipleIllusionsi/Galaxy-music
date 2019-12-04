@@ -33,6 +33,7 @@ const Navbar = ({ location: { pathname } }) => {
             isOpen ? "navbar__list--opened" : ""
           } `}
           style={style}
+          onClick={() => setOpen(false)}
         >
           <li className="navbar__list-item">
             <NavLink to="/browse">Browse</NavLink>
