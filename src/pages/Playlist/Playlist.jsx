@@ -24,7 +24,6 @@ const Playlist = props => {
     fetchData();
   }, [props.match.params]);
 
-  console.log("render from playlist solo");
   return (
     <>
       {!playlist ? <Spinner /> : <ObjectOverview data={playlist} />}

@@ -2,8 +2,8 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 
 import Spinner from "../../components/spinner/Spinner";
-import Player from "../../components/Player/Player";
 import Intro from "./Intro";
+import TracksList from "../../components/TracksList/TracksList";
 
 import "./Artist.scss";
 
@@ -38,7 +38,7 @@ const Artist = props => {
   }, [props.match.params]);
 
   const { artistInfo, artistTrack } = data;
-  console.log("render from ArtistPage");
+
   return (
     <main className="artist-page">
       {artistInfo === null ? (
@@ -49,17 +49,11 @@ const Artist = props => {
           <Intro info={artistInfo} />
 
           {artistTrack && (
-            <ul className="tracks-list">
-              {artistTrack.data.map(track => (
-                <Player
-                  isPlaying={track.id === playingTrack ? true : false}
-                  handler={setPlayingTrack}
-                  key={`${track.id}`}
-                  cover={track.album.cover_small}
-                  track={track}
-                />
-              ))}
-            </ul>
+            <TracksList
+              data={artistTrack.data}
+              playingTrack={playingTrack}
+              setTrack={setPlayingTrack}
+            />
           )}
         </>
       )}

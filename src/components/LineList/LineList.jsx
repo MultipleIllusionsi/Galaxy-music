@@ -13,28 +13,25 @@ const sliceStr = (str, maxStrInTheRow) => {
   }
 };
 
-const LineList = ({ data }) => {
-  console.log("---render from LINELIST---");
-  return (
-    <div className="center-page">
-      <>
-        <ul className="LineList mt-md">
-          {data.map(dataItem => (
-            <Link key={dataItem.id} to={`/album/${dataItem.id}`}>
-              <li className="LineList__item">
-                <span>{sliceStr(dataItem.title, 35)}</span>
-                <span className="LineList__item-artist">
-                  <span>by </span>
-                  {dataItem.artist.name}
-                </span>
-              </li>
-            </Link>
-          ))}
-        </ul>
-        <CtaButton to="/charts">Get more albums</CtaButton>
-      </>
-    </div>
-  );
-};
+const LineList = ({ data }) => (
+  <div className="center-page">
+    <>
+      <ul className="LineList mt-md">
+        {data.map(dataItem => (
+          <Link key={dataItem.id} to={`/album/${dataItem.id}`}>
+            <li className="LineList__item">
+              <span>{sliceStr(dataItem.title, 35)}</span>
+              <span className="LineList__item-artist">
+                <span>by </span>
+                {dataItem.artist.name}
+              </span>
+            </li>
+          </Link>
+        ))}
+      </ul>
+      <CtaButton to="/charts">Get more albums</CtaButton>
+    </>
+  </div>
+);
 
 export default LineList;

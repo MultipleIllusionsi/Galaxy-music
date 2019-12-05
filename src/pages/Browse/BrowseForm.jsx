@@ -8,13 +8,13 @@ import FilterTab from "./FilterTab";
 const cors = `https://cors-anywhere.herokuapp.com/`;
 const api = `http://api.deezer.com/`;
 
-const BrowseForm = props => {
+const BrowseForm = ({ handlers }) => {
   const {
-    setTabFromParent,
+    setTabs,
     setFilterData,
     setSearchData,
     setLoading,
-  } = props;
+  } = handlers;
 
   const [queryTitle, setQueryTitle] = useState("");
   const [queryType, setQueryType] = useState("");
@@ -53,7 +53,7 @@ const BrowseForm = props => {
 
   const handleTabs = ({ target: { value } }) => {
     setTab(value);
-    setTabFromParent(value);
+    setTabs(value);
     if (value === "filter" && genres === null) {
       console.log("genres were fetched");
       fetchGenres();
@@ -66,7 +66,7 @@ const BrowseForm = props => {
       const res = await axios.get(`${cors}${api}genre`);
 
       if (window.innerWidth > 600) {
-        const resFull = res.data.data.slice(0, 25);
+        const resFull = res.data.data.slice(0, 24);
         setGenres(resFull);
       } else {
         const resCutted = res.data.data.slice(0, 9);

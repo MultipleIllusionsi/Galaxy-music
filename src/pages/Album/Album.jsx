@@ -23,7 +23,6 @@ const Album = props => {
     fetchData();
   }, [props.match.params]);
 
-  console.log("render from album solo");
   return (
     <>{!album ? <Spinner /> : <ObjectOverview data={album} />}</>
   );

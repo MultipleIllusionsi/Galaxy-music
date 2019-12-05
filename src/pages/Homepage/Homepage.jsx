@@ -76,6 +76,5 @@ const Homepage = () => {
     </main>
   );
 };
-// }
 
 export default Homepage;

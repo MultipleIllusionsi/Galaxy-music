@@ -1,13 +1,14 @@
 import React, { useState } from "react";
 import Spinner from "../../components/spinner/Spinner";
 
-import "./ObjectOverview.scss";
 import Player from "../../components/Player/Player";
+
+import "./ObjectOverview.scss";
 
 const ObjectOverview = props => {
   const [playingTrack, setPlayingTrack] = useState(0);
-
   const { data } = props;
+
   return (
     <main className="Overview-page">
       {data === null ? (

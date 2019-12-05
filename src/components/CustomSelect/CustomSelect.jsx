@@ -24,7 +24,7 @@ class CustomSelect extends Component {
 
   render() {
     const { expanded, currentSelectOption } = this.state;
-    // console.log("render from customSelect");
+
     return (
       <ul className="select">
         <div onClick={this.toggleSelect} className="checked-option">

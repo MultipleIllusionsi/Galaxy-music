@@ -27,7 +27,6 @@ const Album = () => {
     fetchData();
   }, []);
 
-  console.log("render from groupAlbum");
   return (
     <main className="groupAlbum-page">
       <h3 className="text--big-space pt-md">New Albums</h3>

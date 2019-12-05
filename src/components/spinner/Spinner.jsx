@@ -1,21 +1,18 @@
 import React from "react";
 import spinner from "../../assets/spinner.svg";
 
-const Spinner = () => {
-  console.log("render from spinner");
-  return (
-    <div>
-      <img
-        src={spinner}
-        alt="Loading..."
-        style={{
-          width: "100px",
-          margin: "40px auto",
-          display: "block",
-        }}
-      />
-    </div>
-  );
-};
+const Spinner = () => (
+  <div>
+    <img
+      src={spinner}
+      alt="Loading..."
+      style={{
+        width: "100px",
+        margin: "40px auto",
+        display: "block",
+      }}
+    />
+  </div>
+);
 
 export default Spinner;
