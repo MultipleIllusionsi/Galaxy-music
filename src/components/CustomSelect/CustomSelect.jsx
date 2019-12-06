@@ -6,14 +6,14 @@ const CustomSelect = ({ option }) => {
   const [open, setOpen] = useState(false);
   const [currOption, setCurrOption] = useState("All");
 
-  const chooseSelectOption = e => {
-    setCurrOption(e.target.dataset.value);
+  const chooseSelectOption = ({
+    target: {
+      dataset: { value },
+    },
+  }) => {
+    setCurrOption(value);
+    option(value);
     setOpen(!open);
-  };
-
-  const sendOption = e => {
-    e.stopPropagation();
-    option(e.target.dataset.value);
   };
 
   return (
@@ -24,10 +24,7 @@ const CustomSelect = ({ option }) => {
       </div>
       <ol
         className={`option-list ${open === true ? "open" : "close"}`}
-        onClick={e => {
-          chooseSelectOption(e);
-          sendOption(e);
-        }}
+        onClick={e => chooseSelectOption(e)}
       >
         <li data-value="Track" className="option-list__item">
           Track
