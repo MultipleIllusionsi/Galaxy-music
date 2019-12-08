@@ -55,7 +55,6 @@ const BrowseForm = ({ handlers }) => {
     setTab(value);
     setTabs(value);
     if (value === "filter" && genres === null) {
-      console.log("genres were fetched");
       fetchGenres();
     }
   };

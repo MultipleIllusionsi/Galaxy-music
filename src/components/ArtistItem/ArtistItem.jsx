@@ -6,13 +6,13 @@ import PlayLink from "../../components/PlayLink/PlayLink";
 import "./ArtistItem.scss";
 
 const ArtistItem = ({ data, sliderClass }) => (
-  <div className={`ArtistItem ${sliderClass}`}>
+  <figure className={`ArtistItem ${sliderClass}`}>
     <img
       className="ArtistItem__img"
       src={data.picture_xl}
       alt="img"
     />
-    <span className="abs-center">
+    <figcaption className="abs-center">
       <PlayLink to={`/artist/${data.id}`} />
       <h2 className="artist-name">{data.name}</h2>
       <div className="mt-md">
@@ -20,8 +20,8 @@ const ArtistItem = ({ data, sliderClass }) => (
           More from this artist
         </CtaButton>
       </div>
-    </span>
-  </div>
+    </figcaption>
+  </figure>
 );
 
 export default memo(ArtistItem);

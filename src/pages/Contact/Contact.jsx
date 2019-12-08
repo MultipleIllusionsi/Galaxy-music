@@ -3,7 +3,7 @@ import React from "react";
 import "./Contact.scss";
 
 const Contact = () => (
-  <div className="contact-page">
+  <main className="contact-page">
     <section className="contact-page__background">
       <div className="contact-page__card--wrapper">
         <div className="contact-page__card">
@@ -67,7 +67,7 @@ const Contact = () => (
         </a>
       </p>
     </section>
-  </div>
+  </main>
 );
 
 export default Contact;
